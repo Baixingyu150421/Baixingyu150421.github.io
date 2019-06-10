@@ -171,6 +171,157 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-mysql" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/10/mysql/">mysql</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/10/mysql/" class="archive-article-date">
+  	<time datetime="2019-06-10T03:56:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="什么是存储引擎"><a href="#什么是存储引擎" class="headerlink" title="什么是存储引擎"></a>什么是存储引擎</h2><ul>
+<li>MySQL可以将数据以不同的技术存储在文件（内存中），这种技术就是存储引擎 。存储数据，查询数据。常见的引擎有MyISAM,InnoDB等  MySQL5.5以后数据库表的默认存储引擎是InnoDB。</li>
+</ul>
+<h2 id="各种存储引擎的特点"><a href="#各种存储引擎的特点" class="headerlink" title="各种存储引擎的特点"></a>各种存储引擎的特点</h2><table>
+<thead>
+<tr>
+<th>特点</th>
+<th>MyISAM</th>
+<th>InnoDB</th>
+<th>Memory</th>
+<th>Archive</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>存储限制</td>
+<td>256TB</td>
+<td>64TB</td>
+<td>有</td>
+<td>无</td>
+</tr>
+<tr>
+<td>事务安全</td>
+<td>-</td>
+<td>支持</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>支持索引</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>-</td>
+</tr>
+<tr>
+<td>锁颗粒</td>
+<td>表锁</td>
+<td>行锁</td>
+<td>表锁</td>
+<td>行锁</td>
+</tr>
+<tr>
+<td>数据压缩</td>
+<td>支持</td>
+<td>-</td>
+<td>-</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>支持外键</td>
+<td>-</td>
+<td>支持</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h2 id="mysql中的锁"><a href="#mysql中的锁" class="headerlink" title="mysql中的锁"></a>mysql中的锁</h2><ul>
+<li><strong>共享锁（读锁）：</strong>  在同一时间段内，多个用户可以读取同一资源，读取过程中数据不会发生变化。</li>
+<li><strong>排它锁（写锁）：</strong> 在任何时候只能有一个用户写入资源，当进行写锁时会发生阻塞其他读锁或写锁的操作。</li>
+</ul>
+<h2 id="锁颗粒（锁粒度）"><a href="#锁颗粒（锁粒度）" class="headerlink" title="锁颗粒（锁粒度）"></a>锁颗粒（锁粒度）</h2><ul>
+<li><strong>表锁</strong> 是一种开销最小的锁策略（锁粒度大）</li>
+<li><strong>行锁</strong> 是一种开销最大的锁策略（锁粒度小）</li>
+</ul>
+<h2 id="事务的特性"><a href="#事务的特性" class="headerlink" title="事务的特性"></a>事务的特性</h2><ul>
+<li><strong>原子性（Atomicity）</strong> 多个事务提交要么同时成功，要么就都失败，不可能存在既成功又失败的情况。 </li>
+<li><strong>一致性（Consistency）</strong> 事务的提交是按照我们预先设计数据库的规则来的。</li>
+<li><strong>隔离性（Isolatiobn）</strong> 不同事务之间是互不影响的。</li>
+<li><strong>持久性（Durability）</strong> 事务提交后就要持久化到硬盘。</li>
+</ul>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><blockquote>
+<p>索引是对数据库表中的一行或多行进行排序（相当于书的目录）</p>
+</blockquote>
+<ul>
+<li><strong>索引的分类</strong> 普通索引，唯一索引，全文索引，btree索引，hash索引…<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2></li>
+<li>MyISAM：适用于事务的处理不多的情况。</li>
+<li>InnoDB：适用于事务处理比较多，需要外键支持的情况。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mysql存储引擎</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/10/mysql/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-distributed" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -421,6 +572,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mysql存储引擎</a>
               </li>
             
             <div class="clearfix"></div>
