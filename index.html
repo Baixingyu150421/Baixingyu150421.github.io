@@ -171,6 +171,93 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-log" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/10/log/">log</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/10/log/" class="archive-article-date">
+  	<time datetime="2019-06-10T12:47:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="日志框架的使用"><a href="#日志框架的使用" class="headerlink" title="日志框架的使用"></a>日志框架的使用</h2><ul>
+<li>日志框架是一套能够实现日志输出的工具包</li>
+<li>能够描述系统运行状态的所有时间都可以算作日志</li>
+<li>主要包括：用户下线，接口超时，数据库崩溃等<h2 id="日志框架的能力"><a href="#日志框架的能力" class="headerlink" title="日志框架的能力"></a>日志框架的能力</h2></li>
+<li>定制输出目标</li>
+<li>定制输出格式</li>
+<li>携带上下文信息</li>
+<li>运行时选择性输出</li>
+<li>灵活配置</li>
+<li>优异的性能<h2 id="日志门面与日志实现"><a href="#日志门面与日志实现" class="headerlink" title="日志门面与日志实现"></a>日志门面与日志实现</h2>日志门面(接口规范) | 日志实现（具体实现）</li>
+<li>——– | ——-<br>JCL | JUL<br>SLF4J（springBoot所采用的） | Log4j/Logback（这两种日志实现是同一作者）<br>jboss-logging | Log4j2</li>
+</ul>
+<h2 id="springBoot项目中的基础日志文件配置-logback-spring-xml"><a href="#springBoot项目中的基础日志文件配置-logback-spring-xml" class="headerlink" title="springBoot项目中的基础日志文件配置(logback-spring.xml)"></a>springBoot项目中的基础日志文件配置(logback-spring.xml)</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="comment">&lt;!--windows下的路径与mac或linux下的日志文件路径是不同的--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--控制台输出格式--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"consoleLog"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.ConsoleAppender"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">layout</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.PatternLayout"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span></span><br><span class="line">                %d - %msg%n</span><br><span class="line">            <span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">layout</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--轮动策略--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"fileInfoLog"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">level</span>&gt;</span>ERROR<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span></span><br><span class="line">                %msg%n</span><br><span class="line">            <span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--滚动策略--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--路径--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>D://var/sell/logs/info.%d.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--日志级别 Error &gt; Warn &gt; Info &gt; Debug--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"fileErrorLog"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--过滤日志--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.ThresholdFilter"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">level</span>&gt;</span>ERROR<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span></span><br><span class="line">                %msg%n</span><br><span class="line">            <span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--滚动策略--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--路径--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>D://var/sell/logs/error.%d.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"info"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"consoleLog"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"fileInfoLog"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"fileErrorLog"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springBoot‘s log framework</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/10/log/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-personal-thought" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -669,6 +756,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">springBoot‘s log framework</a>
               </li>
              
               <li class="article-tag-list-item">
