@@ -6,22 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Concurrency Programming  | My Blog</title>
+  <title>spring-ioc | My Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="日常更博">
-<meta name="keywords" content="Java并发编程">
+  <meta name="description" content="回忆杀O(∩_∩)O~">
+<meta name="keywords" content="spring源码学习-ioc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Concurrency Programming ">
-<meta property="og:url" content="http://yoursite.com/2019/06/11/Concurrency-Programming/index.html">
+<meta property="og:title" content="spring-ioc">
+<meta property="og:url" content="http://yoursite.com/2019/06/14/spring-ioc/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="日常更博">
+<meta property="og:description" content="回忆杀O(∩_∩)O~">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560861477&di=f367bb048d5c6c8969dec37b89b97314&imgtype=jpg&er=1&src=http%3A%2F%2Fimg3.a0bi.com%2Fupload%2Fttq%2F20140821%2F1408608082938.jpg">
-<meta property="og:updated_time" content="2019-06-11T13:33:48.982Z">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560517322581&di=37e6d16cd1680b98dbc671cf92efbb54&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F9vo3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2Faec379310a55b3196253c65c42a98226cffc1774.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/06/14/spring-ioc/spring-ioc%5Cioc2.png">
+<meta property="og:updated_time" content="2019-06-14T13:19:56.982Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Concurrency Programming ">
-<meta name="twitter:description" content="日常更博">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560861477&di=f367bb048d5c6c8969dec37b89b97314&imgtype=jpg&er=1&src=http%3A%2F%2Fimg3.a0bi.com%2Fupload%2Fttq%2F20140821%2F1408608082938.jpg">
+<meta name="twitter:title" content="spring-ioc">
+<meta name="twitter:description" content="回忆杀O(∩_∩)O~">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560517322581&di=37e6d16cd1680b98dbc671cf92efbb54&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F9vo3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2Faec379310a55b3196253c65c42a98226cffc1774.jpg">
   
     <link rel="alternative" href="/atom.xml" title="My Blog" type="application/atom+xml">
   
@@ -173,74 +174,83 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Concurrency-Programming" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-spring-ioc" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Concurrency Programming 
+      spring-ioc
     </h1>
   
 
         
-        <a href="/2019/06/11/Concurrency-Programming/" class="archive-article-date">
-  	<time datetime="2019-06-11T12:35:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-11</time>
+        <a href="/2019/06/14/spring-ioc/" class="archive-article-date">
+  	<time datetime="2019-06-14T10:11:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p> <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560861477&di=f367bb048d5c6c8969dec37b89b97314&imgtype=jpg&er=1&src=http%3A%2F%2Fimg3.a0bi.com%2Fupload%2Fttq%2F20140821%2F1408608082938.jpg" alt="啦啦啦"></p>
-<p>日常更博</p>
- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="500" height="86" src="//music.163.com/outchain/player?type=2&id=536647836&auto=0&height=66"></iframe>
+        <p> <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560517322581&di=37e6d16cd1680b98dbc671cf92efbb54&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F9vo3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2Faec379310a55b3196253c65c42a98226cffc1774.jpg" alt="童年记忆"><br>回忆杀O(∩_∩)O~</p>
 <a id="more"></a>
-### 并发
-> 同时拥有两个或者多个线程，如果程序在单核处理器上运行，多个线程将交替地换入或者换出内存，这些线程是同时“存在”的，每个线程都处于执行中的某个状态，如果运行在多核处理器上，此时，程序中的每个线程都将分配到一个处理器核上，因此可以同时运行。
-
-<blockquote>
-<p>并发编程领域，有两大核心问题：一个是互斥，即同一时刻只允许一个线程访问共享资源；另一个是同步，即线程之间如何通信、协作。这两大问题，管程都是能够解决的。</p>
+<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><blockquote>
+<p>学习Java EE也有段时间了，Spring这个框架无论是在学习还是工作中都是会接触的，因此如果能对Spring框架有很深入的理解，无论是求职面试亦或是编码开发都会对我们产生帮助。所以今天我就来分享一下我所理解的spring中的IOC,虽然网上的相关资料有很多但是我觉得还是要自己整理一下，构建自己的知识体系。</p>
 </blockquote>
-<h3 id="高并发"><a href="#高并发" class="headerlink" title="高并发"></a>高并发</h3><p>高并发（High Concurrency）是互联网分布式系统架构设计中必须考虑的因素之一，它通常是指，通过设计保证系统能够同时并行处理很多请求。<br>并发：多个线程操作相同的资源，保证线程安全，合理使用资源<br>高并发：服务能够同时处理很多请求，提高程序性能</p>
-<h3 id="并发编程的相关概念"><a href="#并发编程的相关概念" class="headerlink" title="并发编程的相关概念"></a>并发编程的相关概念</h3><p>CPU高速缓存的配置，在CPU核心与高速缓存之间存在一条快速通道。主存与高速缓存都连接到系统总线上。同时该总线也用于其他组件间的通信。cache用于数据的读取与写入。随着CPU的处理速度越来越快，在计算机中又会继续增加二级缓存，三级缓存，这些缓存比一级缓存更大但是速度更慢。</p>
-<h3 id="为什么要引入cache的概念"><a href="#为什么要引入cache的概念" class="headerlink" title="为什么要引入cache的概念"></a>为什么要引入cache的概念</h3><p>简单来将CPU的频率太快了，快到主存跟不上，因此CPU常常需要等待主存，浪费资源，为了缓解CPU与内存之间速度不匹配的问题引入了缓存（结构：CPU–&gt;cache–&gt;memory）</p>
-<h3 id="CPU-cache的意义"><a href="#CPU-cache的意义" class="headerlink" title="CPU cache的意义"></a>CPU cache的意义</h3><ul>
-<li>时间局部性原理：如果某个数据被访问，那么在不久的将来它很可能被再次访问</li>
-<li>空间局部性原理：如果某个数据被访问，那么与它相邻的数据很快也可能被访问</li>
+<h3 id="自己实现一下最简单的IOC容器"><a href="#自己实现一下最简单的IOC容器" class="headerlink" title="自己实现一下最简单的IOC容器"></a>自己实现一下最简单的IOC容器</h3><p>可能你的学习方法不是最佳的，但是实践永远是检验真理的唯一标准，结合其他文章我来分享一下一个实现ioc的demo</p>
+<ul>
+<li><p>简单的配置文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"student"</span> <span class="attr">class</span>=<span class="string">"com.ioc.bean.Student"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>  <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"tony"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>  <span class="attr">name</span>=<span class="string">"age"</span> <span class="attr">value</span>=<span class="string">"22"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>  <span class="attr">name</span>=<span class="string">"studentId"</span> <span class="attr">value</span>=<span class="string">"4651335"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>  <span class="attr">name</span>=<span class="string">"score"</span> <span class="attr">value</span>=<span class="string">"88.8"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义实体类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String studentId;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String score;</span><br><span class="line">    <span class="comment">//get/set/toString方法就不贴出来了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>核心类，bean的创建，初始化，ioc容器的创建</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleIOC</span> </span>&#123;</span><br><span class="line">    <span class="comment">//存放被初始化后的bean对象</span></span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, Object&gt; beanMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">    <span class="comment">//IOC容器的初始化</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SimpleIOC</span><span class="params">(String location)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        loadBeans(location);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取bean对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getBean</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        Object bean = beanMap.get(name);</span><br><span class="line">        <span class="keyword">if</span> (bean == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"there is no bean with name "</span> + name);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> bean;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//核心方法</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">loadBeans</span><span class="params">(String location)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// 加载 xml 配置文件</span></span><br><span class="line">        InputStream inputStream = <span class="keyword">new</span> FileInputStream(location);</span><br><span class="line">        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span><br><span class="line">        DocumentBuilder docBuilder = factory.newDocumentBuilder();</span><br><span class="line">        <span class="comment">//解析xml文件</span></span><br><span class="line">        Document doc = docBuilder.parse(inputStream);</span><br><span class="line">        <span class="comment">//拿到根标签</span></span><br><span class="line">        Element root = doc.getDocumentElement();</span><br><span class="line">        <span class="comment">//拿到子标签</span></span><br><span class="line">        NodeList nodes = root.getChildNodes();</span><br><span class="line">        <span class="comment">// 遍历 &lt;bean&gt; 标签</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nodes.getLength(); i++) &#123;</span><br><span class="line">            Node node = nodes.item(i);</span><br><span class="line">            <span class="keyword">if</span> (node <span class="keyword">instanceof</span> Element) &#123;</span><br><span class="line">                Element ele = (Element) node;</span><br><span class="line">                <span class="comment">//获取id，class的值</span></span><br><span class="line">                String id = ele.getAttribute(<span class="string">"id"</span>);</span><br><span class="line">                String className = ele.getAttribute(<span class="string">"class"</span>);</span><br><span class="line">                <span class="comment">// 加载 beanClass</span></span><br><span class="line">                Class beanClass = <span class="keyword">null</span>;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="comment">//获取类对象</span></span><br><span class="line">                    beanClass = Class.forName(className);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 创建 bean</span></span><br><span class="line">                Object bean = beanClass.newInstance();</span><br><span class="line">                <span class="comment">// 遍历 &lt;property&gt; 标签</span></span><br><span class="line">                NodeList propertyNodes = ele.getElementsByTagName(<span class="string">"property"</span>);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; propertyNodes.getLength(); j++) &#123;</span><br><span class="line">                    Node propertyNode = propertyNodes.item(j);</span><br><span class="line">                    <span class="keyword">if</span> (propertyNode <span class="keyword">instanceof</span> Element) &#123;</span><br><span class="line">                        Element propertyElement = (Element) propertyNode;</span><br><span class="line">                        <span class="comment">//获取name,value属性的值</span></span><br><span class="line">                        String name = propertyElement.getAttribute(<span class="string">"name"</span>);</span><br><span class="line">                        String value = propertyElement.getAttribute(<span class="string">"value"</span>);</span><br><span class="line">                        <span class="comment">// 利用反射将 bean 相关字段访问权限设为可访问（反射的标准流程）</span></span><br><span class="line">                        Field declaredField = bean.getClass().getDeclaredField(name);</span><br><span class="line">                        <span class="comment">//设置字段可访问</span></span><br><span class="line">                        declaredField.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                        <span class="keyword">if</span> (value != <span class="keyword">null</span> &amp;&amp; value.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                            <span class="comment">// 将属性值填充到相关字段中</span></span><br><span class="line">                            declaredField.set(bean, value);</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="comment">//ref属性</span></span><br><span class="line">                            String ref = propertyElement.getAttribute(<span class="string">"ref"</span>);</span><br><span class="line">                            <span class="keyword">if</span> (ref == <span class="keyword">null</span> || ref.length() == <span class="number">0</span>) &#123;</span><br><span class="line">                                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"ref config error"</span>);</span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="comment">// 将引用填充到相关字段中</span></span><br><span class="line">                            declaredField.set(bean, getBean(ref));</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">// 将 bean 注册到 bean 容器中</span></span><br><span class="line">                        registerBean(id, bean);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//注册bean到IOC容器</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">registerBean</span><span class="params">(String id, Object bean)</span> </span>&#123;</span><br><span class="line">        beanMap.put(id, bean);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试程序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IOCTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">// for test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SimpleIOCTest</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        String file = SimpleIOC.class.getClassLoader().getResource(<span class="string">"ioc.xml"</span>).getFile();</span><br><span class="line">        SimpleIOC simpleIOC = <span class="keyword">new</span> SimpleIOC(file);</span><br><span class="line">        Student bean = (Student)simpleIOC.getBean(<span class="string">"student"</span>);</span><br><span class="line">        System.out.println(bean);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
-<h3 id="CPU多级缓存—缓存一致性协议"><a href="#CPU多级缓存—缓存一致性协议" class="headerlink" title="CPU多级缓存—缓存一致性协议"></a>CPU多级缓存—缓存一致性协议</h3><p>用来保证多个CPU cache之间缓存共享数据的一致性</p>
-<h3 id="缓存一致性协议【MESI】"><a href="#缓存一致性协议【MESI】" class="headerlink" title="缓存一致性协议【MESI】"></a>缓存一致性协议【MESI】</h3><ul>
-<li>M:modified 修改, 指该缓存行只被缓存在当前的CPU缓存中且是被修改的。因此在该缓存行的数据与主存中的数据是不一致的，在未来的某个时间点需要将该缓存行数据写回主存。时间点是在其他cpu读取主存中的相应的数据之前。当该缓存行的数据被写回主存后，该缓存行的状态变为E独享状态。</li>
-<li>E: exclusive 独享 是指该缓存行只被缓存在当前的CPU缓存中且是未被修改过的，与主存中的数据是一致的。在任何时刻，有其他cpu读取该内存时变为S共享状态。当CPU修改对应该缓存行数据时会，该缓存行变为M状态。</li>
-<li>S: shared  共享 它意味着该缓存行可能被多个CPU缓存，且数据与主存中的数据是一致的。当某个CPU修改该缓存行数据时其他CPU的缓存行是会被作废的，变为I无效状态。</li>
-<li>I:invalid 无效 无效是指该缓存行是无效的，可能有其他CPU修改了该缓存行。</li>
+<blockquote>
+<p>上面这个例子很好理解，首先我们需要使用Map来存放bean对象，同时需要读取xml配置文件，获取id,class属性的值，并通过反射调用创建对象，接着读取property标签，获取对象的字段值，通过反射来设置对象的字段。保存在Map中。</p>
+</blockquote>
+<h3 id="进入正题"><a href="#进入正题" class="headerlink" title="进入正题"></a>进入正题</h3><p><strong>接下来我们就去分析spring中的ioc是如何实现的</strong></p>
+<ul>
+<li><p>application.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"</span> <span class="attr">default-autowire</span>=<span class="string">"byName"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"messageService"</span> <span class="attr">class</span>=<span class="string">"com.ioc.bean.Service.impl.MessageServiceImpl"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>简单跑一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ApplicationContext context =</span><br><span class="line">                <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"classpath:application.xml"</span>);</span><br><span class="line">        System.out.println(<span class="string">"context 启动成功"</span>);</span><br><span class="line"><span class="comment">//        MessageService messageService = context.getBean(MessageService.class);</span></span><br><span class="line">        MessageService messageService = (MessageService) context.getBean(<span class="string">"messageService"</span>);</span><br><span class="line">        System.out.println(messageService.sendMessage());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
-<h3 id="CPU的乱序执行优化"><a href="#CPU的乱序执行优化" class="headerlink" title="CPU的乱序执行优化"></a>CPU的乱序执行优化</h3><p>处理器为提高运算速度而做出违背代码原有顺序的优化。<br>结果：CPU的乱序执行优化在并发情况下可能会导致执行结果不符合预期。</p>
-<h3 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h3><p>为了屏蔽掉硬件与操作系统之间对内存访问的差异，JVM定义了一套内存访问规范以达到在不同的平台下java程序对内存访问的一致性。规定了一个线程如何，何时看到由其他线程所修改的共享变量的值以及在必要时如何同步的访问共享变量。</p>
-<p>堆区是在运行时动态分配内存的，同时内存的回收由垃圾收集器根据垃圾收集算法进行回收的。缺点是由于是在运行时动态分配内存因此分配与释放内存速度较慢。<br>两个Thread Stack中都有对堆区的变量的引用，那在方法调用时都会去访问该变量并拿到这个变量的私有拷贝。</p>
-<h3 id="Java内存模型-同步八种操作"><a href="#Java内存模型-同步八种操作" class="headerlink" title="Java内存模型-同步八种操作"></a>Java内存模型-同步八种操作</h3><ul>
-<li>Lock（锁定）：作用于主内存的变量，把一个变量标识成一条线程独占状态</li>
-<li>unLock（解锁）：作用于主内存的变量，把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定</li>
-<li>read（读取）：作用于主内存的变量，把一个变量值从主内存传输带线程的工作内存中，以便随后的load动作使用</li>
-<li>load（载入）：作用于工作内存的变量，它把read操作从主内存中得到的变量值放入工作内存的变量副本中</li>
-<li>use（使用）：作用于工作内存的变量，把工作内存中的一个变量值传递给执行引擎</li>
-<li>assign（赋值）：作用于工作内存的变量，它把一个从执行引擎接收到的值赋值给工作内存的变量</li>
-<li>store（存储）：作用于工作内存的变量，把工作内存中的一个变量值传送到主内存中，以便后续的write操作</li>
-<li>write（写入）：作用与主内存的变量，它把store操作从工作内存中一个变量的值传送到主内存的变量中</li>
+<blockquote>
+<p>ApplicationContext在启动过程中，会负责创建实例bean,并进行依赖注入。通过启动类代码也可以看出来。</p>
+</blockquote>
+<h3 id="BeanFactory简介"><a href="#BeanFactory简介" class="headerlink" title="BeanFactory简介"></a>BeanFactory简介</h3><p>BeanFactory顾名思义就是生产bean的工厂，它负责创建并管理bean实例,ApplicationContext就是BeanFactory。UML类图如下<br><img src="spring-ioc%5Cioc2.png" alt="ioc-1"></p>
+<p><strong>这个我们重点关注一下几个类的方法：</strong></p>
+<ul>
+<li>ApplicationContext</li>
+<li>ListableBeanFactory</li>
+<li>HierarchicalBeanFactory</li>
+<li>BeanFactory</li>
+<li>AutowireCapableBeanFactory</li>
 </ul>
-<h3 id="Java内存模型-同步规则"><a href="#Java内存模型-同步规则" class="headerlink" title="Java内存模型-同步规则"></a>Java内存模型-同步规则</h3><ul>
-<li>如果要把一个变量从主内存中复制到工作内存，就需要按顺序的执行read和load操作，如果把变量从工作内存中同步回主内存中就需要按顺序地执行store和write操作，但是Java内存模型只要求上诉操作必须按顺序执行，而没有保证必须是连续执行的。</li>
-<li>不允许read和load,store和write操作之一单独出现</li>
-<li>不允许一个线程丢弃它最近assgin的操作，即变量在工作内存中改变之后必须要同步会主内存</li>
-<li>不允许一个线程无原因（没发生过任何assgin操作）把数据从工作内存同步会主内存中</li>
-<li>一个新的变量只能从主内存中诞生，不允许在工作内存中直接使用一个未被初始化的变量，即就是对一个变量实施use和store操作之前，必须先执行过assgin和load操作</li>
-<li>一个变量在同一个时刻只允许一条线程对其进行lock操作，但locak操作可以被同一条线程重复执行多次，多次执行lock后，只用执行同样次数的unlock操作，变量才会别解锁。lock和unlock必须成对出现。</li>
-<li>如果对一个变量执行lock操作，将会清空工作内存中此变量的值，在执行引擎使这个变量前需要执行load或assgin操作初始化变量的值</li>
-<li>如果一个变量事先没有被lock操作锁定，则不允许对它执行unlock操作，也不允许去unlock一个被其它线程锁定的变量</li>
-<li>对于一个变量执行unlock操作之前，必须先把此变量同步到主内存中（执行store和write操作）</li>
+<h3 id="启动过程分析"><a href="#启动过程分析" class="headerlink" title="启动过程分析"></a>启动过程分析</h3><ul>
+<li><p>首先以ClassPathXmlApplicationContext作为入口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ClassPathXmlApplicationContext</span><span class="params">(String[] paths, Class&lt;?&gt; clazz, ApplicationContext parent)</span> <span class="keyword">throws</span> BeansException </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(parent);</span><br><span class="line">    Assert.notNull(paths, <span class="string">"Path array must not be null"</span>);</span><br><span class="line">    Assert.notNull(clazz, <span class="string">"Class argument must not be null"</span>);</span><br><span class="line">    <span class="keyword">this</span>.configResources = <span class="keyword">new</span> Resource[paths.length];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; paths.length; ++i) &#123;</span><br><span class="line">        <span class="keyword">this</span>.configResources[i] = <span class="keyword">new</span> ClassPathResource(paths[i], clazz);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.refresh(); <span class="comment">//核心方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>跟进到refresh()方法，该方法说明applicationContext是可以被销毁重建的，然后在重新执行一次初始化操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> <span class="keyword">throws</span> BeansException, IllegalStateException </span>&#123;</span><br><span class="line">    Object var1 = <span class="keyword">this</span>.startupShutdownMonitor;</span><br><span class="line">    <span class="keyword">synchronized</span>(<span class="keyword">this</span>.startupShutdownMonitor) &#123;</span><br><span class="line">        <span class="keyword">this</span>.prepareRefresh();</span><br><span class="line">        ConfigurableListableBeanFactory beanFactory = <span class="keyword">this</span>.obtainFreshBeanFactory();</span><br><span class="line">        <span class="keyword">this</span>.prepareBeanFactory(beanFactory);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.postProcessBeanFactory(beanFactory);</span><br><span class="line">            <span class="keyword">this</span>.invokeBeanFactoryPostProcessors(beanFactory);</span><br><span class="line">            <span class="keyword">this</span>.registerBeanPostProcessors(beanFactory);</span><br><span class="line">            <span class="keyword">this</span>.initMessageSource();</span><br><span class="line">            <span class="keyword">this</span>.initApplicationEventMulticaster();</span><br><span class="line">            <span class="keyword">this</span>.onRefresh();</span><br><span class="line">            <span class="keyword">this</span>.registerListeners();</span><br><span class="line">            <span class="keyword">this</span>.finishBeanFactoryInitialization(beanFactory);</span><br><span class="line">            <span class="keyword">this</span>.finishRefresh();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (BeansException var9) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.logger.isWarnEnabled()) &#123;</span><br><span class="line">                <span class="keyword">this</span>.logger.warn(<span class="string">"Exception encountered during context initialization - cancelling refresh attempt: "</span> + var9);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">this</span>.destroyBeans();</span><br><span class="line">            <span class="keyword">this</span>.cancelRefresh(var9);</span><br><span class="line">            <span class="keyword">throw</span> var9;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.resetCommonCaches();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
+<center style="color:red">未完待续~</center>
+
 
       
 
@@ -285,7 +295,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java并发编程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">spring源码学习-ioc</a>
         		</li>
       		
 		</ul>
@@ -341,7 +351,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/11/Concurrency-Programming/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/14/spring-ioc/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -355,18 +365,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/06/12/Java-Thread/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Java Thread
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/06/10/log/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">log</div>
+    <a href="/2019/06/12/Java-Thread/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java Thread</div>
       <i class="icon-circle-right"></i>
     </a>
   
