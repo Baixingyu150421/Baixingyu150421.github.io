@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="My Blog">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560620770709&di=dc9afc55f419d09919eb992deb6a4ec8&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F1c72ca3e7831a9bdf7e4164f7ced85082c3ace93.jpg">
-<meta property="og:updated_time" content="2019-06-16T12:55:18.353Z">
+<meta property="og:updated_time" content="2019-06-18T13:17:59.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx">
 <meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560620770709&di=dc9afc55f419d09919eb992deb6a4ec8&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F1c72ca3e7831a9bdf7e4164f7ced85082c3ace93.jpg">
@@ -191,7 +191,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.1k字</span>
+        <span class="post-count">1.7k字</span>
       </span>
     </span>
 
@@ -200,7 +200,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
+        <span class="post-count">6分</span>
       </span>
     </span>
 </div>
@@ -380,12 +380,132 @@
 <td>目录</td>
 <td>Nginx的日志目录</td>
 </tr>
+</tbody></table>
+<h3 id="Nginx的安装编译参数"><a href="#Nginx的安装编译参数" class="headerlink" title="Nginx的安装编译参数"></a>Nginx的安装编译参数</h3><ul>
+<li>nginx  -V 查看配置参数</li>
+</ul>
+<table>
+<thead>
 <tr>
-<td><center style="color:red">未完待续~</center></td>
-<td></td>
+<th>编译选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–prefix=/etc/nginx</td>
+<td>安装目的目录或路径</td>
+</tr>
+<tr>
+<td>–sbin-path=/usr/lib64/nginx/modules</td>
+<td>安装目的目录或路径</td>
+</tr>
+<tr>
+<td>–modules-path=/usr/lib64/nginx/modules</td>
+<td>安装目的目录或路径</td>
+</tr>
+<tr>
+<td>–conf-path=/etc/nginx/nginx.conf</td>
+<td>安装目的目录或路径</td>
+</tr>
+<tr>
+<td>–error-log-path=/var/log/nginx/error.log</td>
+<td>安装目的目录或路径</td>
+</tr>
+<tr>
+<td>–http-log-path=/var/log/nginx/access.log</td>
+<td>安装目的目录或路径</td>
+</tr>
+<tr>
+<td>–pid-path=/var/run/nginx.pid</td>
+<td>安装目的目录或路径</td>
+</tr>
+<tr>
+<td>–lock-path=/var/run/nginx.lock</td>
+<td>安装目的目录或路径</td>
+</tr>
+<tr>
+<td>–http-client-body-temp-path=/var/cache/nginx/client_temp</td>
+<td>执行对应模块时，Nginx所保留的临时性文件</td>
+</tr>
+<tr>
+<td>–http-proxy-temp-path=/var/cache/nginx/proxy_temp</td>
+<td>执行对应模块时，Nginx所保留的临时性文件</td>
+</tr>
+<tr>
+<td>–http-fastcgi-temp-path=/var/cachr/nginx/fastcgi_temp</td>
+<td>执行对应模块时，Nginx所保留的临时性文件</td>
+</tr>
+<tr>
+<td>–http-uwsgi-temp-path=/var/cachr/nginx/uwsgi_temp</td>
+<td>执行对应模块时，Nginx所保留的临时性文件</td>
+</tr>
+<tr>
+<td>–http-scgi-temp-path=/var/cachr/nginx/scgi_temp</td>
+<td>执行对应模块时，Nginx所保留的临时性文件</td>
+</tr>
+<tr>
+<td>–user=nginx</td>
+<td>设置Nginx进程启动的用户和用户组</td>
+</tr>
+<tr>
+<td>–group=nginx</td>
+<td>设置Nginx进程启动的用户和用户组</td>
+</tr>
+<tr>
+<td>–with-cc-opt=parameters</td>
+<td>设置额外的参数将被添加到CFLAGS变量</td>
+</tr>
+<tr>
+<td>–with-ld-opt=parameters</td>
+<td>设置附加的参数，链接系统库</td>
+</tr>
+</tbody></table>
+<h3 id="Nginx的配置文件"><a href="#Nginx的配置文件" class="headerlink" title="Nginx的配置文件"></a>Nginx的配置文件</h3><p>Nginx/nginx.conf  主配置文件<br>/etc/nginx/conf.d/*.conf  其他配置文件</p>
+<h3 id="默认配置语法"><a href="#默认配置语法" class="headerlink" title="默认配置语法"></a>默认配置语法</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user</td>
+<td>设置nginx服务的系统使用用户(全局)</td>
+</tr>
+<tr>
+<td>worker_processes</td>
+<td>工作进程数</td>
+</tr>
+<tr>
+<td>error_log</td>
+<td>nginx的错误日志</td>
+</tr>
+<tr>
+<td>pid</td>
+<td>nginx服务启动时候pid</td>
+</tr>
+<tr>
+<td>events/worker_connections</td>
+<td>每个进程允许的最大连接数</td>
+</tr>
+<tr>
+<td>events/use</td>
+<td>工作进程数</td>
+</tr>
+<tr>
+<td>- nginx协议层的配置</td>
 <td></td>
 </tr>
 </tbody></table>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">http&#123;</span><br><span class="line">	include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '</span><br><span class="line">                      '$status $body_bytes_sent "$http_referer" '</span><br><span class="line">                      '"$http_user_agent" "$http_x_forwarded_for"';</span><br><span class="line">    access_log  /var/log/nginx/access.log  main;</span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">    #gzip  on;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line">        #charset koi8-r;</span><br><span class="line">        #access_log  /var/log/nginx/host.access.log  main;</span><br><span class="line">        location / &#123;</span><br><span class="line">            root   /usr/share/nginx/html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">        #error_page  404              /404.html;</span><br><span class="line">        # redirect server error pages to the static page /50x.html</span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">            root   /usr/share/nginx/html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">	server&#123;</span><br><span class="line">		....</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>systemctl  restart（reload）  nginx.service    重启nginx服务<h3 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h3></li>
+<li>request  请求行，请求头部，请求数据</li>
+<li>response 状态行，消息报头，响应正文</li>
+</ul>
+<center style="color:red">未完待续~  2-13</center>
+
 
       
 
@@ -641,7 +761,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Nginx入门</a>
+                <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -649,7 +769,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
+                <a href="javascript:void(0)" class="js-tag color3">Nginx入门</a>
               </li>
              
               <li class="article-tag-list-item">
