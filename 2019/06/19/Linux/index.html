@@ -17,7 +17,7 @@
 <meta property="og:description" content="写在前面 使用Vmware虚拟机创建虚拟空间，安装CentOS7.3操作系统。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560941289326&di=63c8682ce1839384b9b31d15e525d712&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20161110%2Ff23455cd1a79469895a4d2e0a50bc5ab_th.jpeg">
-<meta property="og:updated_time" content="2019-06-19T10:02:37.637Z">
+<meta property="og:updated_time" content="2019-06-20T07:31:54.418Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux">
 <meta name="twitter:description" content="写在前面 使用Vmware虚拟机创建虚拟空间，安装CentOS7.3操作系统。">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">696字</span>
+        <span class="post-count">1.2k字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
+        <span class="post-count">4分</span>
       </span>
     </span>
 </div>
@@ -327,6 +327,40 @@
 <li>命令行模式</li>
 </ul>
 <h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><p>数字+yy拷贝多少行<br>数字+dd删除当前行<br>命令行下  /关键字  回车查找   n就是查找下一个<br>设置行号 ：set nu，取消行号:set nonu<br>编辑/etc/profile文件  G在最末行，gg在最首行在正常模式下执行<br>撤销在正常模式下输入 u<br>将光标移动 shift+g</p>
+<h3 id="关机-amp-重启命令"><a href="#关机-amp-重启命令" class="headerlink" title="关机&amp;重启命令"></a>关机&amp;重启命令</h3><ul>
+<li>shutdown<br>shutdown -h now :表示立即关机<br>shutdown -h 1: 表示1分钟后关机<br>shutdown -r now:立即重启</li>
+<li>halt<br>就是直接使用，效果等价于关机</li>
+<li>reboot<br>重启</li>
+<li>sync<br>把内存的数据同步到硬盘<blockquote>
+<p>注意：当我们关机或是重启时，都应当先执行一下sync指令，把内存数据写入到磁盘，防止数据丢失。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="用户登录和注销"><a href="#用户登录和注销" class="headerlink" title="用户登录和注销"></a>用户登录和注销</h3><p>使用su切换root用户，使用logout注销用户</p>
+<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><p>用户，用户组，加目录/home<br>Linux系统是一个多用户多任务的操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。<br>Linux的账户至少要属于一个组</p>
+<ul>
+<li><p>添加用户<br>useradd  [选型] 用户名<br>passwd 设置密码</p>
+</li>
+<li><p>删除用户<br>userdel  用户名  （保留家目录）<br>userdel -r 用户名（删除用户以及家目录）</p>
+<blockquote>
+<p>注意： 删除用户时，保留家目录</p>
+</blockquote>
+</li>
+<li><p>查询用户信息<br>id 用户名<br>su - 切换用户名<br>whoami 查看当前用户/登录用户</p>
+</li>
+</ul>
+<h3 id="用户组"><a href="#用户组" class="headerlink" title="用户组"></a>用户组</h3><p>类似于角色，系统可以对有共性的多个用户进行统一的管理</p>
+<ul>
+<li>增加组<br>groupadd 组名</li>
+<li>删除组<br>groupdel 组名</li>
+<li>新增用户到指定组<br>useradd -g 用户组 用户名</li>
+<li>修改用户组<br>usermod  -g 用户组 用户名</li>
+</ul>
+<h3 id="用户和组的相关文件"><a href="#用户和组的相关文件" class="headerlink" title="用户和组的相关文件"></a>用户和组的相关文件</h3><ul>
+<li>用户配置文件：/etc/passwd<br>记录用户的各种信息<br>每行的含义：用户名：口令：用户标识号：组标识号：注释性描述：主目录：登录shell</li>
+<li>组配置文件：/etc/group<br>口令配置文件<br>每行含义：登录名：加密口令：最后一次修改时间：最小时间间隔：最大时间间隔：警告时间：不活动时间：失效时间：标志</li>
+<li>口令配置文件：/etc/shadow<br>组配置文件，记录Linux包含的组的信息<br>每行含义：组名:口令：组标识号：组内用户列表</li>
+</ul>
 
       
 
@@ -569,10 +603,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线程的原子性，安全性，有序性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
@@ -582,6 +612,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Linux入门</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">线程的原子性，安全性，有序性</a>
               </li>
              
               <li class="article-tag-list-item">
