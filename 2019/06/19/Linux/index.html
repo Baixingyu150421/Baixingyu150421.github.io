@@ -17,7 +17,7 @@
 <meta property="og:description" content="写在前面 使用Vmware虚拟机创建虚拟空间，安装CentOS7.3操作系统。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560941289326&di=63c8682ce1839384b9b31d15e525d712&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20161110%2Ff23455cd1a79469895a4d2e0a50bc5ab_th.jpeg">
-<meta property="og:updated_time" content="2019-06-23T09:52:30.263Z">
+<meta property="og:updated_time" content="2019-06-24T10:48:50.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux">
 <meta name="twitter:description" content="写在前面 使用Vmware虚拟机创建虚拟空间，安装CentOS7.3操作系统。">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.1k字</span>
+        <span class="post-count">2.8k字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">7分</span>
+        <span class="post-count">10分</span>
       </span>
     </span>
 </div>
@@ -583,7 +583,111 @@
 </tr>
 </tbody></table>
 <ul>
-<li>cal已日历的方式显示时间  cal 2019显示一年的日历</li>
+<li>cal已日历的方式显示时间  cal 2019显示一年的日历<h3 id="搜索查找类"><a href="#搜索查找类" class="headerlink" title="搜索查找类"></a>搜索查找类</h3></li>
+<li>find指令将从指令目录向下递归遍历其各个子目录，将满足条件的文件或者目录显示在终端。<br>find [搜索范围]  [选项]</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-name&lt;查询方式&gt;</td>
+<td>按照指定的文件名查找模式查找文件</td>
+</tr>
+<tr>
+<td>-user&lt;用户名&gt;</td>
+<td>查找属于指定用户名所有文件</td>
+</tr>
+<tr>
+<td>-size&lt;文件大小&gt;</td>
+<td>按照指定的文件大小查找文件</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>locate指令可以快速定位文件路径。locate指令利用事先建立的系统中所有文件名称及路径的locate数据库事先快速定位给定文件。Locate指令无需遍历整个文件系统，查询速度极快。为保证查询结果的准确度，管理员必须定期更新locate时刻，首次查询必须updatedb。</p>
+</li>
+<li><p>grep指令和管道符号|<br>grep过滤查找，管道符，“|”，表示将前一个命令的处理结果输出传递给后面的命令处理<br>grep [选项] 查找内容 源文件</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>显示匹配行及行号</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>忽略字母大小写</td>
+</tr>
+</tbody></table>
+<h3 id="压缩与解压缩类"><a href="#压缩与解压缩类" class="headerlink" title="压缩与解压缩类"></a>压缩与解压缩类</h3><ul>
+<li><p>gzip/gunzip指令<br>gzip 文件  （压缩文件，只能将文件压缩为*.gz文件）<br>gunzip 文件（解压缩文件命令）</p>
+</li>
+<li><p>zip/unzip指令<br>zip [选项] xxx.zip 将要压缩的内容 （压缩文件和目录的命令）<br>unzip [选项] xxx.zip （解压缩文件）<br>zip常用选项 -r 递归压缩，即压缩目录<br>unzip常用选项 -d&lt;目录&gt; ： 指解压后文件的存放目录</p>
+</li>
+<li><p>tar指令<br>tar指令是打包指令，.tar.gz文件</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>产生.tar打包文件</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示详细信息</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>指定压缩后的文件名</td>
+</tr>
+<tr>
+<td>-z</td>
+<td>打包同时压缩</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>解压.tar文件</td>
+</tr>
+</tbody></table>
+<p>例子： tar -zcvf  a.tar.gz a1.txt a2.txt          tar -zxvf  a.tar.gz      tar -zxvf  xxxx.tar.gz  -C   xxx(目录)</p>
+<h3 id="组管理和权限管理"><a href="#组管理和权限管理" class="headerlink" title="组管理和权限管理"></a>组管理和权限管理</h3><p>在Linux中的每个用户必须属于一个组，不能对独立于组外。在Linux中每个文件有所有者，所在组，其他组的概念。</p>
+<ul>
+<li>所有者</li>
+<li>所在组</li>
+<li>其他组</li>
+<li>改变用户所在组</li>
+</ul>
+<blockquote>
+<p><strong>文件/目录所有者</strong></p>
+</blockquote>
+<ul>
+<li><p>查看文件的所有者   ls -ahl </p>
+</li>
+<li><p>修改文件所有者   chown 用户名 文件名</p>
+</li>
+<li><p>组的创建<br>groupadd 组名   添加用户 useradd -g xxx  xx</p>
+</li>
+<li><p>文件/目录 所在组<br>修改文件所在组 chgrp 组名 文件名</p>
+</li>
+<li><p>其他组<br>除文件的所有者和所在组的用户外，系统的其他用户都是文件的其他组。</p>
+</li>
+<li><p>改变用户所在组<br>usermod  -g 组名 用户名<br>usermod -d 目录名 用户名 改变该用户登陆的初始目录</p>
+</li>
 </ul>
 
       
@@ -840,11 +944,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
+                <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -872,11 +976,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
+                <a href="javascript:void(0)" class="js-tag color5">mysql存储引擎</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mysql存储引擎</a>
+                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
               </li>
              
               <li class="article-tag-list-item">
