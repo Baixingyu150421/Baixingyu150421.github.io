@@ -17,7 +17,7 @@
 <meta property="og:description" content="写在前面 使用Vmware虚拟机创建虚拟空间，安装CentOS7.3操作系统。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560941289326&di=63c8682ce1839384b9b31d15e525d712&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20161110%2Ff23455cd1a79469895a4d2e0a50bc5ab_th.jpeg">
-<meta property="og:updated_time" content="2019-06-24T10:48:50.396Z">
+<meta property="og:updated_time" content="2019-06-25T06:44:24.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux">
 <meta name="twitter:description" content="写在前面 使用Vmware虚拟机创建虚拟空间，安装CentOS7.3操作系统。">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.8k字</span>
+        <span class="post-count">3.4k字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">10分</span>
+        <span class="post-count">12分</span>
       </span>
     </span>
 </div>
@@ -689,6 +689,162 @@
 <li><p>改变用户所在组<br>usermod  -g 组名 用户名<br>usermod -d 目录名 用户名 改变该用户登陆的初始目录</p>
 </li>
 </ul>
+<p><strong>权限基本介绍</strong><br>例子：-rw-r–r–  1 tom  root     0 6月  24 18:32 apple.txt<br>第一个-表示文件类型： -普通文件 d:目录 l:软链接 c:字符设备【键盘鼠标】  b:块文件，硬盘<br>文件所有者，所在用户组，其他组用户  r：可读 w：可写 x：可执行<br>1如果是文件，表示硬链接数，如果是目录表示目录的子目录个数。<br>时间是指最后修改时间<br>时间前面的数字表示文件的大小。</p>
+<ul>
+<li>rwx作用到文件</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>【r】</td>
+<td>可以读取查看</td>
+</tr>
+<tr>
+<td>【w】</td>
+<td>可以修改，但是不代表可以删除该文件，删除一个文件的前提条件是对该文件所在的目录有写的权限，才能删除该文件</td>
+</tr>
+<tr>
+<td>【x】</td>
+<td>可以被执行</td>
+</tr>
+</tbody></table>
+<ul>
+<li>rwx作用到目录</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>【r】</td>
+<td>可读取，ls查看目录内容</td>
+</tr>
+<tr>
+<td>【w】</td>
+<td>可以修改，目录内创建+删除+重命名目录</td>
+</tr>
+<tr>
+<td>【x】</td>
+<td>可以进入目录</td>
+</tr>
+</tbody></table>
+<ul>
+<li>修改权限-chmod<blockquote>
+<p>通过chmod可以修改文件或目录的权限</p>
+</blockquote>
+</li>
+</ul>
+<p>第一种方式：+，-，=变更权限<br>u:所有者，g：所在者，o:其他人，a:所有人（u，g，o的总和）</p>
+<ul>
+<li><p>修改文件所有者-chown</p>
+<blockquote>
+<p>chown newowner file 改变文件所有者<br>chown newowner:newgroup file 改变用户的所有者和所有者<br>-R 如果是目录，则使得其下所有子文件或目录递归生效。</p>
+</blockquote>
+</li>
+<li><p>修改文件所在组-chgrp</p>
+<blockquote>
+<p>chgrp newgroup file 改变文件的所在组</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="crond任务调度"><a href="#crond任务调度" class="headerlink" title="crond任务调度"></a>crond任务调度</h3><blockquote>
+<p>crontab进行定时任务的设置<br>任务调度：是指系统在某个时间执行的特定的命令或程序，<br>任务调度分类: 1.系统工作：有些重要工作必须周而复始地执行<br>2.个别用户工作，个别用户可能希望执行某些程序<br>service crond restart 重启调度任务</p>
+</blockquote>
+<ul>
+<li>常用选项</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选型</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-e</td>
+<td>编辑crontab定时任务</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>查询crontab任务</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>删除当前用户所有的crontab任务</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>含义</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一个*</td>
+<td>一个小时中的第几分钟</td>
+<td>0-59</td>
+</tr>
+<tr>
+<td>第二个·*</td>
+<td>一天中的第几个小时</td>
+<td>0-23</td>
+</tr>
+<tr>
+<td>第三个*</td>
+<td>一个月中的第几天</td>
+<td>1-31</td>
+</tr>
+<tr>
+<td>第四个*</td>
+<td>一年中的第几月</td>
+<td>1-12</td>
+</tr>
+<tr>
+<td>第五个*</td>
+<td>一周中的星期几</td>
+<td>0-7（0,7都是星期日）</td>
+</tr>
+</tbody></table>
+<ul>
+<li>特殊符号说明</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>特殊符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>代表任何时间</td>
+</tr>
+<tr>
+<td>‘</td>
+<td>代表不连续的时间</td>
+</tr>
+<tr>
+<td>-</td>
+<td>代表连续的时间范围</td>
+</tr>
+<tr>
+<td>*/n</td>
+<td>代表每隔多久执行一次</td>
+</tr>
+</tbody></table>
+<h3 id="Linux磁盘分区，挂载"><a href="#Linux磁盘分区，挂载" class="headerlink" title="Linux磁盘分区，挂载"></a>Linux磁盘分区，挂载</h3><ul>
+<li>分区基础知识</li>
+</ul>
 
       
 
@@ -940,7 +1096,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
+                <a href="javascript:void(0)" class="js-tag color5">线程的原子性，安全性，有序性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -952,7 +1108,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线程的原子性，安全性，有序性</a>
+                <a href="javascript:void(0)" class="js-tag color3">Linux入门</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -960,15 +1120,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Linux入门</a>
+                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -984,6 +1140,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
               </li>
              
@@ -993,10 +1153,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">个人感悟（纯属瞎扯）</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
              
               <li class="article-tag-list-item">
