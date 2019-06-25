@@ -15,14 +15,14 @@
 <meta property="og:site_name" content="My Blog">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561208346213&di=bbb76971512fa396fda7a049425e7763&imgtype=0&src=http%3A%2F%2Fi8.download.fd.pchome.net%2Ft_600x1024%2Fg1%2FM00%2F12%2F1D%2FooYBAFbyYyWIfHdmACJs2Q7Yp1EAAC4LQMJG70AImzx874.jpg">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a53a7920b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a53b78847?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a568820c7?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://camo.githubusercontent.com/57a746bf254e100c3fd0d2691d172df5c29592eb/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d31302d322f32383535393432312e6a7067">
+<meta property="og:image" content="https://camo.githubusercontent.com/a0e0c5b1377f6ab52365479c52313f4238550d31/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d31302d322f38323035333133342e6a7067">
+<meta property="og:image" content="https://camo.githubusercontent.com/83e4b2a638e8352a21feafeafe97cbad0fc2a335/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d31302d322f353337333038322e6a7067">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a5663f62b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a55fd52b3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7ac1c13504?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7aca19377b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
-<meta property="og:updated_time" content="2019-06-22T10:12:05.870Z">
+<meta property="og:updated_time" content="2019-06-25T11:17:51.288Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql索引">
 <meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561208346213&di=bbb76971512fa396fda7a049425e7763&imgtype=0&src=http%3A%2F%2Fi8.download.fd.pchome.net%2Ft_600x1024%2Fg1%2FM00%2F12%2F1D%2FooYBAFbyYyWIfHdmACJs2Q7Yp1EAAC4LQMJG70AImzx874.jpg">
@@ -245,8 +245,8 @@
 <li>每个数据页都会为存储在它里边儿的记录生成一个页目录，在通过主键查找某条记录的时候可以在页目录中使用二分法快速定位到对应的槽，然后再遍历该槽对应分组中的记录即可快速找到指定的记录</li>
 <li>以其他列(非主键)作为搜索条件：只能从最小记录开始依次遍历单链表中的每条记录。</li>
 </ul>
-<p><strong>这里引用两种图来加深印象</strong><br><img src="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a53a7920b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt><br><img src="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a53b78847?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></p>
-<h3 id="索引提高检索速度"><a href="#索引提高检索速度" class="headerlink" title="索引提高检索速度"></a>索引提高检索速度</h3><p>其实就是将无序的数据变成有序(相对)，其实底层结构就是B+树，B+树作为树的一种实现，能够让我们很快地查找出对应的记录。<br><strong>这里引用两种图来加深印象</strong><br><img src="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a568820c7?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt><br><img src="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a5663f62b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></p>
+<p><strong>这里引用两种图来加深印象</strong><br><img src="https://camo.githubusercontent.com/57a746bf254e100c3fd0d2691d172df5c29592eb/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d31302d322f32383535393432312e6a7067" alt><br><img src="https://camo.githubusercontent.com/a0e0c5b1377f6ab52365479c52313f4238550d31/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d31302d322f38323035333133342e6a7067" alt></p>
+<h3 id="索引提高检索速度"><a href="#索引提高检索速度" class="headerlink" title="索引提高检索速度"></a>索引提高检索速度</h3><p>其实就是将无序的数据变成有序(相对)，其实底层结构就是B+树，B+树作为树的一种实现，能够让我们很快地查找出对应的记录。<br><strong>这里引用两种图来加深印象</strong><br><img src="https://camo.githubusercontent.com/83e4b2a638e8352a21feafeafe97cbad0fc2a335/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d31302d322f353337333038322e6a7067" alt><br><img src="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a5663f62b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></p>
 <h3 id="索引降低增删改的速度"><a href="#索引降低增删改的速度" class="headerlink" title="索引降低增删改的速度"></a>索引降低增删改的速度</h3><p>B+树是平衡树的一种。B+树是平衡树的一种，是不会退化成链表的，树的高度都是相对比较低的，建立索引实际上就是建立一颗B+树。要维持平衡树的结构势必要带来额外的性能开销。</p>
 <h3 id="哈希索引"><a href="#哈希索引" class="headerlink" title="哈希索引"></a>哈希索引</h3><p>哈希索引就是采用一定的哈希算法，把键值换算成新的哈希值，检索时不需要类似B+树那样从根节点到叶子节点逐级查找，只需一次哈希算法即可立刻定位到相应的位置，速度非常快。<br><strong>上图</strong><br><img src="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a55fd52b3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt><br>** 使用hash索引的缺点**</p>
 <ul>
@@ -533,7 +533,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线程的原子性，安全性，有序性</a>
+                <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -541,7 +545,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
+                <a href="javascript:void(0)" class="js-tag color5">线程的原子性，安全性，有序性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -549,15 +553,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx入门</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -577,10 +577,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
               </li>
              
@@ -590,6 +586,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">个人感悟（纯属瞎扯）</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
              
               <li class="article-tag-list-item">
