@@ -17,7 +17,7 @@
 <meta property="og:description" content="写在前面 使用Vmware虚拟机创建虚拟空间，安装CentOS7.3操作系统。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560941289326&di=63c8682ce1839384b9b31d15e525d712&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20161110%2Ff23455cd1a79469895a4d2e0a50bc5ab_th.jpeg">
-<meta property="og:updated_time" content="2019-06-25T06:44:24.701Z">
+<meta property="og:updated_time" content="2019-06-26T08:06:40.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux">
 <meta name="twitter:description" content="写在前面 使用Vmware虚拟机创建虚拟空间，安装CentOS7.3操作系统。">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.4k字</span>
+        <span class="post-count">3.9k字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">12分</span>
+        <span class="post-count">14分</span>
       </span>
     </span>
 </div>
@@ -844,8 +844,66 @@
 </tbody></table>
 <h3 id="Linux磁盘分区，挂载"><a href="#Linux磁盘分区，挂载" class="headerlink" title="Linux磁盘分区，挂载"></a>Linux磁盘分区，挂载</h3><ul>
 <li>分区基础知识</li>
+<li>mbr分区：</li>
 </ul>
-
+<p>1.最多支持四个主分区<br>2.系统只能安装在主分区<br>3.扩展分区要占一个主分区<br>4.MBR最大只支持2TB,但拥有最好的兼容性</p>
+<ul>
+<li>gtp分区</li>
+</ul>
+<p>1.支持无限多个主分区（手操作系统的限制）<br>2.最大支持18EB的大容量（EB=1024PB, PB = 1024TB）<br>3.windows7 64位以后支持gtp</p>
+<blockquote>
+<p>Linux的分区是与文件目录相关的，具有挂载和卸载的概念。</p>
+</blockquote>
+<p>lsblk -f查看磁盘的分区和挂载情况。<br>分区             文件类型                    唯一标识                            挂载点<br>sda<br>├─sda1          xfs                                       ef2f3e4f-6060-4581-b319-5baae2caef2f   /boot<br>└─sda2          LVM2_member                 uqY5Uj-PPwH-qrYH-kQX8-kWiS-pTXk-Qhj6GX<br>  ├─centos-root xfs                               3b873565-29b7-4ae1-9686-0d32115fbd94   /<br>  └─centos-swap swap                        1df49ecb-b13b-4cfb-91ee-80c57596866b   [SWAP]</p>
+<ul>
+<li><p>添加一块硬盘<br>虚拟机添加硬盘—&gt;分区—-&gt;格式化—&gt;挂载—–&gt;设置可自动挂载（步骤）</p>
+</li>
+<li><p>磁盘情况查询<br>df  -lh  查询系统整体磁盘使用情况</p>
+</li>
+<li><p>查看指定目录的磁盘占用情况<br>du -h /目录</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-s</td>
+<td>指定目录占用大小汇总</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>带计量单位</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>含文件</td>
+</tr>
+<tr>
+<td>–max-depth=1</td>
+<td>子目录深度</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>列出明细的同时，增加汇总值</td>
+</tr>
+</tbody></table>
+<ul>
+<li>统计文件个数<br>ls -l /home | grep “^-“ | wc -l</li>
+<li>统计目录的个数<br>ls -l /home | grep “^d” | wc -l</li>
+<li>统计所有文件的个数<br>ls -lR /home | grep “^-“ | wc -l</li>
+<li>同时所有目录的个数<br>ls -lR /home | grep “^d” | wc -l</li>
+<li>以树状显示目录结构<br>tree     yum install  xxx  用于安装指令</li>
+</ul>
+<h3 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h3><p>IP地址，默认网关，子网掩码，NAT模式  ifconfig  ping命令</p>
+<ul>
+<li>自动连接（在配置文件中设置  固定的IP地址）<br>vi /etc/sysconfig/network-scripts/ifcfg-ens33 </li>
+<li>重启网络服务<br>service network restart , reboot</li>
+</ul>
+<h3 id="进程管理（重点）"><a href="#进程管理（重点）" class="headerlink" title="进程管理（重点）"></a>进程管理（重点）</h3>
       
 
       
@@ -1096,15 +1154,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1136,19 +1194,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mysql存储引擎</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">个人感悟（纯属瞎扯）</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mysql存储引擎</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
               </li>
              
               <li class="article-tag-list-item">
