@@ -17,7 +17,7 @@
 <meta property="og:description" content="写在前面 使用Vmware虚拟机创建虚拟空间，安装CentOS7.3操作系统。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560941289326&di=63c8682ce1839384b9b31d15e525d712&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20161110%2Ff23455cd1a79469895a4d2e0a50bc5ab_th.jpeg">
-<meta property="og:updated_time" content="2019-06-26T08:06:40.555Z">
+<meta property="og:updated_time" content="2019-06-27T10:25:58.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux">
 <meta name="twitter:description" content="写在前面 使用Vmware虚拟机创建虚拟空间，安装CentOS7.3操作系统。">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.9k字</span>
+        <span class="post-count">5k字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">14分</span>
+        <span class="post-count">18分</span>
       </span>
     </span>
 </div>
@@ -903,7 +903,167 @@
 <li>自动连接（在配置文件中设置  固定的IP地址）<br>vi /etc/sysconfig/network-scripts/ifcfg-ens33 </li>
 <li>重启网络服务<br>service network restart , reboot</li>
 </ul>
-<h3 id="进程管理（重点）"><a href="#进程管理（重点）" class="headerlink" title="进程管理（重点）"></a>进程管理（重点）</h3>
+<h3 id="进程管理（重点）"><a href="#进程管理（重点）" class="headerlink" title="进程管理（重点）"></a>进程管理（重点）</h3><p>进程的基本介绍</p>
+<ul>
+<li>在Linux中，每个执行的程序（代码）都称为一个进程。每个进程都分配一个ID号。</li>
+<li>每个进程，都会对应一个父进程，而这个父进程可以复制多个进程。</li>
+<li>每个进程可以有两种存在方式，前台与后台，所谓前台进程就是用户目前的屏幕可以操作的，而后台进程是实际在操作，但是由于屏幕上无法看到的进程，通常使用后台方式执行。‘</li>
+<li>一般系统的服务都是以后台进程的方式存在，而且都会常驻在系统中，直到关机才结束。</li>
+</ul>
+<p><strong>ps命令</strong><br>查看目前系统中，有哪些正在执行，以及它们执行的状况。ps显示的信息选项：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PID</td>
+<td>进程标识号</td>
+</tr>
+<tr>
+<td>TTY</td>
+<td>终端机号</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>此进程所消CPU时间</td>
+</tr>
+<tr>
+<td>CMD</td>
+<td>正在执行的命令或进程名</td>
+</tr>
+</tbody></table>
+<ul>
+<li>ps -a 显示当前终端的所在进程信息</li>
+<li>ps -u 以用户的格式显示进程信息</li>
+<li>ps -x 显示后台进程运行的参数</li>
+<li>ps -ef 查看父进程<blockquote>
+<p>Linux中的进程状态  S-睡眠，R-正在运行，D-短期等待，Z-僵死进程，T-被跟踪或者被停止 N-优先级很低的进程</p>
+</blockquote>
+</li>
+</ul>
+<p>用户名|进程id|cpu的使用情况|内存使用情况|虚拟内存使用情况|物理内存使用情况|使用的终端|进程状态|启动时间|占用cpu的总时间|进程执行的命令行<br>USER | PID| %CPU |%MEM | VSZ |RSS| TTY | STAT |START | TIME| COMMAND</p>
+<p><strong>终止进程kill与killall</strong></p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>kill 进程id</td>
+<td>终止某个进程</td>
+</tr>
+<tr>
+<td>killall 父进程</td>
+<td>终止父进程及其子进程</td>
+</tr>
+<tr>
+<td>kill -9 进程id</td>
+<td>强制杀掉某个进程</td>
+</tr>
+</tbody></table>
+<p><strong>查看进程树</strong><br>pstree [选项] 可以更加直观的来看进程信息</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-p</td>
+<td>显示进程的pid</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>显示进程的所属用户</td>
+</tr>
+</tbody></table>
+<h3 id="服务管理"><a href="#服务管理" class="headerlink" title="服务管理"></a>服务管理</h3><blockquote>
+<p>服务本质就是进程，但是是运行在后台的，通常都会监听某个端口，等待其他程序的请求，因此我们又称为守护进程。</p>
+</blockquote>
+<p><strong>service管理指令</strong><br>service 服务名 start|stop|restart|reload|status<br>在Centos7.0后使用systemctl</p>
+<p>查看当前系统有哪些服务可用 ls -l /etc/init.d/<br>服务的运行级别  vi /etc/inittab 修改<br>开机流程：<br>开机—&gt;BIOS—-&gt;/boot—-&gt;init进程—&gt;运行级别—&gt;运行级对应的服务</p>
+<p><strong>chkconfig</strong><br>通过chkconfig命令可以给每个服务的各个运行级别设置自启动/关闭</p>
+<ul>
+<li>基本语法<br>基本服务 chkconfig  –list|grep xxx<br>chkconfig 服务名 –list<br>chkconfig –level 5 服务名 on/off</li>
+</ul>
+<p><strong>动态监控进程</strong><br>top与ps的区别是top在执行一段时间可以更新正在运行的进程</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-d 秒数</td>
+<td>指定top命令每隔几秒更新，默认是3秒在top命令的交互模式当中可以执行的命令：</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>使top不显示任何闲置或者僵死进程</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>通过指定监控进程ID来仅仅监控某个进程的状态</td>
+</tr>
+</tbody></table>
+<p>交互操作说明</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>P</td>
+<td>以CPU使用率排序</td>
+</tr>
+<tr>
+<td>M</td>
+<td>以内存的使用率排序</td>
+</tr>
+<tr>
+<td>N</td>
+<td>以PID排序</td>
+</tr>
+<tr>
+<td>q</td>
+<td>退出top</td>
+</tr>
+</tbody></table>
+<p><strong>查看系统网络情况netstat(重要)</strong><br>netstat -anp</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-an</td>
+<td>按一定顺序排列输出</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>显示哪个进程在调用</td>
+</tr>
+</tbody></table>
+<h3 id="RPM和YUM"><a href="#RPM和YUM" class="headerlink" title="RPM和YUM"></a>RPM和YUM</h3><blockquote>
+<p>一种用于互联网下载包的打包及安装工具，它包含在Linux的发行版中，它生产具有.RPM扩展名的文件。是一种软件打包工具。</p>
+</blockquote>
+<p>rpm -qa | grep xx |查询指令<br>rpm -qa | grep X<br>rpm -q  软件包名：查询软件包是否安装<br>rpm -q firefox<br>rpm -qi 软件包名：查询软件包信息<br>rpm -qi file<br>rpm -ql 软件包名 ：查询软件包中的文件<br>rpm -ql firefox<br>rpm -qf 文件全路径名 查询文件所属的软件包<br>rpm -qf /xxxxxx<br>rpm -e RPM报的名称 删除软件包  –nodeps 强制删除<br>rpm -ivh RPM包全路径名称 </p>
+<blockquote>
+<p>yum是一个shell前端软件包管理器，基于RPM包管理器，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖关系，并且一次安装所有依赖的软件包。</p>
+</blockquote>
+<p>yum  list|grep xx软件<br>yum install xx软件</p>
+<h3 id="待更新"><a href="#待更新" class="headerlink" title="待更新~"></a>待更新~</h3>
       
 
       
@@ -1154,19 +1314,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
+                <a href="javascript:void(0)" class="js-tag color5">线程的原子性，安全性，有序性</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线程的原子性，安全性，有序性</a>
+                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1182,15 +1338,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">springBoot‘s log framework</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mysql存储引擎</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1202,15 +1366,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mysql存储引擎</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
