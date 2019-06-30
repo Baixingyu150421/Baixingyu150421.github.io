@@ -17,7 +17,9 @@
 <meta property="og:description" content="写在前面 使用Vmware虚拟机创建虚拟空间，安装CentOS7.3操作系统。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560941289326&di=63c8682ce1839384b9b31d15e525d712&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20161110%2Ff23455cd1a79469895a4d2e0a50bc5ab_th.jpeg">
-<meta property="og:updated_time" content="2019-06-27T10:25:58.241Z">
+<meta property="og:image" content="https://camo.githubusercontent.com/3d2c05419cb1f93fae15869cfc541c2bb3d5674b/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031382f372f332f313634356631613764363464656631613f773d39303126683d35343726663d706e6726733d3732363932">
+<meta property="og:image" content="https://camo.githubusercontent.com/5f3d9061e41baf498b2b37c4d80fad87fcf422ff/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031382f372f332f313634356631633635363736636166363f773d38323326683d33313526663d706e6726733d3135323236">
+<meta property="og:updated_time" content="2019-06-30T12:35:27.761Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux">
 <meta name="twitter:description" content="写在前面 使用Vmware虚拟机创建虚拟空间，安装CentOS7.3操作系统。">
@@ -194,7 +196,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">5k字</span>
+        <span class="post-count">5.3k字</span>
       </span>
     </span>
 
@@ -203,7 +205,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">18分</span>
+        <span class="post-count">19分</span>
       </span>
     </span>
 </div>
@@ -218,16 +220,29 @@
 </blockquote>
 <p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560941289326&di=63c8682ce1839384b9b31d15e525d712&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20161110%2Ff23455cd1a79469895a4d2e0a50bc5ab_th.jpeg" alt="haha"></p>
 <a id="more"></a>
+
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><div><a href="https://github.com/Baixingyu150421/JavaGuide/blob/master/docs/operating-system/%E5%90%8E%E7%AB%AF%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%A4%87%E7%9A%84Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.md" target="_blank" rel="noopener">参考博客</a></div>
+
 <h3 id="虚拟机的网络连接三种形式的说明"><a href="#虚拟机的网络连接三种形式的说明" class="headerlink" title="虚拟机的网络连接三种形式的说明"></a>虚拟机的网络连接三种形式的说明</h3><ul>
-<li>1.桥连接，Linux可以和其它的系统通信。但是可能造成ip冲突</li>
-<li>2.NAT:网络地址转换方式：Linux可以访问外网，不会造成ip冲突</li>
-<li>3.主机模式：你的Linux是一个独立的主机，不能访问外网</li>
+<li><p>1.桥连接，Linux可以和其它的系统通信。但是可能造成ip冲突</p>
+</li>
+<li><p>2.NAT:网络地址转换方式：Linux可以访问外网，不会造成ip冲突</p>
+</li>
+<li><p>3.主机模式：你的Linux是一个独立的主机，不能访问外网</p>
+</li>
+</ul>
+<h3 id="Linux文件系统概览"><a href="#Linux文件系统概览" class="headerlink" title="Linux文件系统概览"></a>Linux文件系统概览</h3><blockquote>
+<p>在Linux操作系统中，所有被操作系统管理的资源，例如网络接口卡、磁盘驱动器、打印机、输入输出设备、普通文件或是目录都被看作是一个文件。<br>也就是说在LINUX系统中有一个重要的概念：一切都是文件。其实这是UNIX哲学的一个体现，而Linux是重写UNIX而来，所以这个概念也就传承了下来。在UNIX系统中，把一切资源都看作是文件，包括硬件设备。UNIX系统把每个硬件都看成是一个文件，通常称为设备文件，这样用户就可以用读写文件的方式实现对硬件的访问。</p>
+</blockquote>
+<ul>
+<li>Linux支持5种文件类型：<br><img src="https://camo.githubusercontent.com/3d2c05419cb1f93fae15869cfc541c2bb3d5674b/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031382f372f332f313634356631613764363464656631613f773d39303126683d35343726663d706e6726733d3732363932" alt></li>
 </ul>
 <h3 id="Linux的目录结构"><a href="#Linux的目录结构" class="headerlink" title="Linux的目录结构"></a>Linux的目录结构</h3><ul>
-<li>Linux是树状文件目录，只有一个根目录/</li>
+<li>Linux是倒立的树状文件目录，只有一个根目录/</li>
 <li>Linux的各个目录存放的内容是规划好的，不要乱放</li>
 <li>Linux是以文件的形式管理我们的设备，因此linux系统，一切皆为文件</li>
 </ul>
+<p><img src="https://camo.githubusercontent.com/5f3d9061e41baf498b2b37c4d80fad87fcf422ff/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031382f372f332f313634356631633635363736636166363f773d38323326683d33313526663d706e6726733d3135323236" alt></p>
 <table>
 <thead>
 <tr>
@@ -237,7 +252,7 @@
 </thead>
 <tbody><tr>
 <td>/bin</td>
-<td>存放最经常使用的指令</td>
+<td>存放最经常使用的指令,即二进制可执行文件（ls,cat,mkdir等）</td>
 </tr>
 <tr>
 <td>/boot</td>
@@ -277,7 +292,7 @@
 </tr>
 <tr>
 <td>/proc</td>
-<td>与Linux的内核相关</td>
+<td>与Linux的内核相关，虚拟文件系统目录，是系统内存的映射</td>
 </tr>
 <tr>
 <td>/root</td>
@@ -289,7 +304,7 @@
 </tr>
 <tr>
 <td>/sbin</td>
-<td>存放的是管理员使用的系统管理程序</td>
+<td>存放的是系统管理员使用的系统级别的管理命令和程序</td>
 </tr>
 <tr>
 <td>/srv</td>
@@ -301,7 +316,7 @@
 </tr>
 <tr>
 <td>/tmp</td>
-<td>用于存放一些临时文件</td>
+<td>用于存放一些临时文件，是公用的临时文件存储点</td>
 </tr>
 <tr>
 <td>/usr（重点）</td>
@@ -319,8 +334,14 @@
 <td>/selinux</td>
 <td>是一种安全子系统</td>
 </tr>
+<tr>
+<td>/lost+found</td>
+<td>这个目录平时是空的，系统非正常关机而留下“无家可归”的文件就在这里</td>
+</tr>
 </tbody></table>
-<h3 id="远程登录XShell"><a href="#远程登录XShell" class="headerlink" title="远程登录XShell"></a>远程登录XShell</h3><h3 id="远程上传下载文件XFtp"><a href="#远程上传下载文件XFtp" class="headerlink" title="远程上传下载文件XFtp"></a>远程上传下载文件XFtp</h3><h3 id="vi和vim编辑器"><a href="#vi和vim编辑器" class="headerlink" title="vi和vim编辑器"></a>vi和vim编辑器</h3><p>Vi是文本编辑器，Vim具有程序编辑能力。</p>
+<h3 id="远程登录XShell"><a href="#远程登录XShell" class="headerlink" title="远程登录XShell"></a>远程登录XShell</h3><h3 id="远程上传下载文件XFtp"><a href="#远程上传下载文件XFtp" class="headerlink" title="远程上传下载文件XFtp"></a>远程上传下载文件XFtp</h3><h2 id="Linux基本命令"><a href="#Linux基本命令" class="headerlink" title="Linux基本命令"></a>Linux基本命令</h2><div>命令大全：<a href="http://man.linuxde.net/" target="_blank" rel="noopener"></a></div>
+
+<h3 id="vi和vim编辑器"><a href="#vi和vim编辑器" class="headerlink" title="vi和vim编辑器"></a>vi和vim编辑器</h3><p>Vi是文本编辑器，Vim具有程序编辑能力。</p>
 <h3 id="vi和vim的三种常模式"><a href="#vi和vim的三种常模式" class="headerlink" title="vi和vim的三种常模式"></a>vi和vim的三种常模式</h3><ul>
 <li>正常模式</li>
 <li>插入模式/编辑模式</li>
@@ -472,7 +493,7 @@
 </tbody></table>
 </li>
 </ul>
-<p>** &gt;输出重定向 指令&gt;&gt;追加指令  **</p>
+<p>** &gt;输出重定向 指令&gt;&gt;追加指令 **</p>
 <table>
 <thead>
 <tr>
@@ -737,7 +758,7 @@
 </tr>
 </tbody></table>
 <ul>
-<li>修改权限-chmod<blockquote>
+<li>修改文件/目录权限-chmod<blockquote>
 <p>通过chmod可以修改文件或目录的权限</p>
 </blockquote>
 </li>
@@ -1386,11 +1407,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">dfs+回溯</a>
+                <a href="javascript:void(0)" class="js-tag color5">spring源码学习-ioc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">spring源码学习-ioc</a>
+                <a href="javascript:void(0)" class="js-tag color2">dfs+回溯</a>
               </li>
             
             <div class="clearfix"></div>
