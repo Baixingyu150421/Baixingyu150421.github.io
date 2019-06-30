@@ -6,22 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Java Thread | My Blog</title>
+  <title>Archives: 2019 | My Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天的主角还是nana(^o^)/~">
-<meta name="keywords" content="线程的原子性，安全性，有序性">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java Thread">
-<meta property="og:url" content="http://yoursite.com/2019/06/12/Java-Thread/index.html">
+  <meta name="description" content="学习使我快乐">
+<meta property="og:type" content="website">
+<meta property="og:title" content="My Blog">
+<meta property="og:url" content="http://yoursite.com/archives/2019/page/3/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="今天的主角还是nana(^o^)/~">
+<meta property="og:description" content="学习使我快乐">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560359833874&di=4f9a4a12eca85ef167b6dcaade89a0af&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201612%2F30%2F20161230164858_jvntS.jpeg">
-<meta property="og:updated_time" content="2019-06-12T15:19:02.126Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java Thread">
-<meta name="twitter:description" content="今天的主角还是nana(^o^)/~">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560359833874&di=4f9a4a12eca85ef167b6dcaade89a0af&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201612%2F30%2F20161230164858_jvntS.jpeg">
+<meta name="twitter:title" content="My Blog">
+<meta name="twitter:description" content="学习使我快乐">
   
     <link rel="alternative" href="/atom.xml" title="My Blog" type="application/atom+xml">
   
@@ -173,268 +169,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java-Thread" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Java Thread
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/06/09/hello-world/" class="archive-article-date">
+  	<time datetime="2019-06-09T02:55:15.848Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-09</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/06/09/hello-world/">Hello World</a>
     </h1>
   
 
-        
-        <a href="/2019/06/12/Java-Thread/" class="archive-article-date">
-  	<time datetime="2019-06-12T14:20:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-12</time>
-</a>
-		 
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.3k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
-      </span>
-    </span>
-</div>
+        <div class="article-info info-on-right">
           
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560359833874&di=4f9a4a12eca85ef167b6dcaade89a0af&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201612%2F30%2F20161230164858_jvntS.jpeg" alt="lalala"></p>
-<p>今天的主角还是nana(^o^)/~</p>
-<a id="more"></a>
+          
 
-<h3 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h3><ul>
-<li>定义：当多个线程访问某个类时，不管运行时环境采用何种调度方式或者这些进程将如何交替执行，并且在主调代码中不需要任何额外的同步或协同，这个类都能表现出正确的行为，那么就称这个类是线程安全的。</li>
-<li>原子性：提供了互斥访问，同一时刻只能有一个线程来对它进行操作</li>
-<li>可见性：一个线程对主内存的修改可以及时的被其他线程观察到</li>
-<li>有序性：一个线程观察其他线程中的指令执行顺序，由于指令重排序的存在，该观察结果一般杂乱无序</li>
-</ul>
-<h3 id="话外音（AtomicInteger的实现原理）"><a href="#话外音（AtomicInteger的实现原理）" class="headerlink" title="话外音（AtomicInteger的实现原理）"></a>话外音（AtomicInteger的实现原理）</h3><p>Atomic的getAndIncrement()方法底层用到了unsafe类这是底层native的实现，其底层方法逻辑是一个CAS+自旋的过程。调用compareAndSwapInt()参数是对象，预期值，实际值，要更改的值。</p>
-<h3 id="一些结论"><a href="#一些结论" class="headerlink" title="一些结论"></a>一些结论</h3><p>在线程竞争激烈的情况下，使用AtomicInteger会进行多次自旋操作，消耗性能。<br>JVM允许把基本类的long,double JVM允许将分为两个32的值进行操作。<br>LongAdder:底层实现是将AtomicLong的value值转换成数组通过hash算法映射到其中一个数字进行计数，最后的结果是这个数组的值的求和累加，每个单元由cell所管理，最后求cell的和，这样的话热点数据进行了分离，提高了并行度。所以LongAdder是在AtomicLong的基础上将单点的更新压力分散到多个节点上。在竞争不激烈时使用base保证与AtomicLong的性能一致，在竞争激烈时并发更新可能会导致统计数据的误差，在高并发的情况下使用LongAdder性能更高，在生成全局唯一的序列号时为保证数据的正确使用AtomicLong</p>
-<h3 id="原子性-Atomic包"><a href="#原子性-Atomic包" class="headerlink" title="原子性-Atomic包"></a>原子性-Atomic包</h3><ul>
-<li>AtomicXXX： CAS,Unsafe.compareAndSwapInt</li>
-<li>AtomicLong,LongAdder</li>
-<li>AtomicReference,AtomicReferenceFieldUpdater</li>
-<li>AtomicStampReference: CAS ABA问题</li>
-</ul>
-<h3 id="原子性-synchronized"><a href="#原子性-synchronized" class="headerlink" title="原子性-synchronized"></a>原子性-synchronized</h3><ul>
-<li><p>修饰代码块：大括号括起来的代码，作用于调用对象</p>
-</li>
-<li><p>修饰方法：整个方法，作用于调用对象</p>
-</li>
-<li><p>修饰静态方法：整个静态方法，作用于所有对象</p>
-</li>
-<li><p>修饰类：括号括起来的部分，作用于所有对象</p>
-<blockquote>
-<p>注：Synchronized关键字是不能从父类继承的，因为它不是方法的修饰符，在子类中需要显示声明。</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="原子性-对比"><a href="#原子性-对比" class="headerlink" title="原子性-对比"></a>原子性-对比</h3><ul>
-<li>synchronized:不可中断锁，适合竞争不激烈，可读性好</li>
-<li>Lock:可中断锁，多样化同步，竞争激烈是能维持常态</li>
-<li>Atomic:竞争激烈是能维持常态，比Lock性能好；只能同步一个值</li>
-</ul>
-<h3 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h3><p>导致共享变量在线程间不可见的原因</p>
-<ul>
-<li>线程交叉执行</li>
-<li>重排序结合线程交叉执行</li>
-<li>共享变量更新后的值没有在工作内存与主内存间及时更新</li>
-</ul>
-<h3 id="JMM关于synchronized的两条规定"><a href="#JMM关于synchronized的两条规定" class="headerlink" title="JMM关于synchronized的两条规定"></a>JMM关于synchronized的两条规定</h3><ul>
-<li>线程解锁前，必须把共享变量的最新值刷新到主内存</li>
-<li>线程加锁时，将清空工作内存中共享变量的值，从而使用共享变量需要从主内存中读取最新的值（加锁与解锁是同一把锁）</li>
-</ul>
-<h3 id="可见性-volatile"><a href="#可见性-volatile" class="headerlink" title="可见性-volatile"></a>可见性-volatile</h3><p>通过加入内存屏障和禁止重排序优化来实现</p>
-<ul>
-<li>对volatile变量写操作时，会在写操作后加入一条store屏障指令，将本地内存中的共享变量刷新到主内存</li>
-<li>对volatile变量读操作时，会在读操作前加入一条load屏障指令，从主内存中读取共享变量</li>
-</ul>
-<h3 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h3><blockquote>
-<p>Java内存模型中，允许编译器和处理器对指令进行重排序，但是重排序过程不会影响到单线程程序的执行，却会影响到多线程并发执行的正确性<br>注： 在无法从happens_before原则推导时，虚拟机或编译器就可能会对指令进行重排序</p>
-</blockquote>
-<h3 id="有序性-happens-before原则"><a href="#有序性-happens-before原则" class="headerlink" title="有序性-happens-before原则"></a>有序性-happens-before原则</h3><ul>
-<li>程序次序规则：一个线程内，按照代码顺序，书写再前面的操作先行发生于书写在后面的代码</li>
-<li>锁定规则：一个unlock操作先行发生于对同一个锁的lock操作</li>
-<li>volatile变量规则：对一个变量的写操作先行发生于对一个变量的读操作</li>
-<li>传递规则：如果操作A先行发生于操作B,操作B先行发生于操作C,那么可推导出操作A先行发生于操作C</li>
-<li>线程启动规则：Thread对象的start()方法先行发生于此线程的其他代码</li>
-<li>线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生</li>
-<li>线程终结规则：线程中所有的操作都先行发生于线程终止的检测，我们可以通过Thread.join方法j结束，Thread.isAlive()的返回值手段检测到线程已经终止执行</li>
-<li>对象终结规则：一个对象的初始化完成先行发生于它的finalize()方法的开始</li>
-</ul>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>请我喝杯咖啡吧~<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/zhifubao.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/weixin.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">线程的原子性，安全性，有序性</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/12/Java-Thread/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/06/14/spring-ioc/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          spring-ioc
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/06/11/Concurrency-Programming/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Concurrency Programming </div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/2019/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/2019/">1</a><a class="page-number" href="/archives/2019/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
   
 
 
@@ -458,8 +238,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
