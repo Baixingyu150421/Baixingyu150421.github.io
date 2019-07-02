@@ -17,7 +17,7 @@
 <meta property="og:description" content="互联网公司广泛应用的一款高性能Key-Value服务器">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3415617548,1216693599&fm=26&gp=0.jpg">
-<meta property="og:updated_time" content="2019-07-02T08:39:18.967Z">
+<meta property="og:updated_time" content="2019-07-02T16:00:54.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis从入门到精通">
 <meta name="twitter:description" content="互联网公司广泛应用的一款高性能Key-Value服务器">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">3.4k字</span>
+        <span class="post-count">3.7k字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">14分</span>
+        <span class="post-count">15分</span>
       </span>
     </span>
 </div>
@@ -1080,7 +1080,93 @@
 <li>持久化的作用<br>redis所有的数据保存在内存中，对数据的更新将异步保存到磁盘。有利于数据的恢复。</li>
 <li>数据库持久化的方式<br>快照（MySQL dump  Redis RDB），写日志 (MySQL Binlog  Hbase Hlog  Redis AOF)</li>
 </ul>
-<center style="color:red">未完待续</center>
+<h3 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h3><p>redis内存—-&gt;RDB文件（二进制）硬盘<br>redis内存&lt;—–RDB文件（二进制）硬盘</p>
+<h3 id="触发机制-三种"><a href="#触发机制-三种" class="headerlink" title="触发机制-三种"></a>触发机制-三种</h3><table>
+<thead>
+<tr>
+<th>触发方式</th>
+<th>策略</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>save(同步)</td>
+<td>save 会阻塞  文件策略：如存在老的RDB文件，新老替换 O(N)</td>
+</tr>
+<tr>
+<td>bgsave(异步)</td>
+<td>使用linux的fork()函数，创建redis的子进程，由子进程来进行创建 O(N)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>自动生成RDB</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>seconds</th>
+<th>changes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>save</td>
+<td>900</td>
+<td>1</td>
+</tr>
+<tr>
+<td>save</td>
+<td>300</td>
+<td>10</td>
+</tr>
+<tr>
+<td>save</td>
+<td>60</td>
+<td>10000</td>
+</tr>
+</tbody></table>
+<ul>
+<li>save与bgsave(也是bgsave的方式去生成RDB文件)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>save</th>
+<th>bgsave</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IO类型</td>
+<td>同步</td>
+<td>异步</td>
+</tr>
+<tr>
+<td>阻塞</td>
+<td>是</td>
+<td>否（阻塞发生在fork）</td>
+</tr>
+<tr>
+<td>复杂度</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>不会消耗额外内存</td>
+<td>不会阻塞客户端</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>阻塞客户端命令</td>
+<td>需要fork,消耗内存</td>
+</tr>
+</tbody></table>
+<ul>
+<li>触发机制-不容忽略方式</li>
+</ul>
+<p>1.全量复制<br>2.debug reload<br>3.shutdown</p>
+<h3 id="RDB总结"><a href="#RDB总结" class="headerlink" title="RDB总结"></a>RDB总结</h3><p>1.RDB是Redis内存到硬盘的快照，用于持久化<br>2.save通常会阻塞<br>3.bgsave不会阻塞Redis,但是会fork新进程<br>4.save自动配置满足任一就会被执行<br>5.有些触发机制不容忽视</p>
+<h3 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h3><center style="color:red">未完待续</center>
 
 
       
@@ -1333,6 +1419,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
@@ -1341,15 +1431,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
+                <a href="javascript:void(0)" class="js-tag color5">线程的原子性，安全性，有序性</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线程的原子性，安全性，有序性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1369,23 +1455,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">springBoot‘s log framework</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">个人感悟（纯属瞎扯）</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1397,6 +1475,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">个人感悟（纯属瞎扯）</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
@@ -1405,15 +1491,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">dfs+回溯</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">spring源码学习-ioc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">dp问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">dfs+回溯</a>
               </li>
             
             <div class="clearfix"></div>
