@@ -17,7 +17,7 @@
 <meta property="og:description" content="互联网公司广泛应用的一款高性能Key-Value服务器">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3415617548,1216693599&fm=26&gp=0.jpg">
-<meta property="og:updated_time" content="2019-07-01T11:54:30.430Z">
+<meta property="og:updated_time" content="2019-07-02T08:39:18.967Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis从入门到精通">
 <meta name="twitter:description" content="互联网公司广泛应用的一款高性能Key-Value服务器">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.5k字</span>
+        <span class="post-count">3.4k字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">10分</span>
+        <span class="post-count">14分</span>
       </span>
     </span>
 </div>
@@ -907,7 +907,180 @@
 </tbody></table>
 <h3 id="实战-2"><a href="#实战-2" class="headerlink" title="实战"></a>实战</h3><p>排行榜<br>score: timestamp saleCount followCount</p>
 <h3 id="Jedis"><a href="#Jedis" class="headerlink" title="Jedis"></a>Jedis</h3><p>redis的java客户端</p>
-<h3 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h3><center style="color:red">未完待续</center>
+<h3 id="慢查询"><a href="#慢查询" class="headerlink" title="慢查询"></a>慢查询</h3><ul>
+<li><p>完整的客户端请求的生命周期<br>client—&gt;发送命令—&gt;排队（cmd1,cmd2,cmd3）—&gt;执行命令—&gt;返回结果</p>
+<blockquote>
+<p>注意：慢查询发生在第三阶段，客户端超时不一定是慢查询，但满查询是客户端超时的一个可能因素。</p>
+</blockquote>
+</li>
+<li><p>两个配置-（slowlog-max-len）</p>
+</li>
+</ul>
+<p>1.先进先出队列<br>2.队列的固定长度<br>3.保存在内存中</p>
+<ul>
+<li>slowlog-log-slower-than</li>
+</ul>
+<p>1.慢查询阈值（单位：微秒）<br>2.slowlog-log-slower-than=0,记录所有命令<br>3.slowlog-log-slower-than&lt;0,不记录任何命令</p>
+<ul>
+<li><p>配置方法</p>
+</li>
+<li><p>1.默认值<br>config get slowlog-max-len = 128<br>config get slowlog-log-slower-than = 10000</p>
+</li>
+<li><p>2.修改配置文件重启(不建议)</p>
+</li>
+<li><p>3.动态配置<br>config set slowlog-max-len 1000<br>config set slowlog-log-slower-than = 1000</p>
+</li>
+<li><p>慢查询命令</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>api</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>slowlog get [n]</td>
+<td>获取慢查询队列</td>
+</tr>
+<tr>
+<td>slowlog len</td>
+<td>获取慢查询队列长度</td>
+</tr>
+<tr>
+<td>slowlog reset</td>
+<td>清空慢查询队列</td>
+</tr>
+</tbody></table>
+<ul>
+<li>运维经验</li>
+</ul>
+<p>1.slowlog-max-len不要设置过大，默认10ms,通常设置1ms<br>2.slowlog-log-slower-than不要设置过小，通常设置1000左右<br>3.理解命令生命周期<br>4.定期持久化慢查询</p>
+<h3 id="pipeline"><a href="#pipeline" class="headerlink" title="pipeline"></a>pipeline</h3><p>流水线的作用：将命令打包，解决网络开销 非原子的命令</p>
+<ul>
+<li>使用建议</li>
+</ul>
+<p>1.注意每次pipeline携带的数据量<br>2.pipeline每次只能作用在一个Redis节点上<br>3.M操作（命令是原子的）与pipeline区别</p>
+<h3 id="发布订阅"><a href="#发布订阅" class="headerlink" title="发布订阅"></a>发布订阅</h3><ul>
+<li>角色<br>消息发布者，消息订阅者，频道，redis没有消息堆积的功能也就是无法获取历史消息</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>api</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>publish channel message</td>
+<td>发布命令</td>
+</tr>
+<tr>
+<td>subscribe channel 一个或多个</td>
+<td>订阅</td>
+</tr>
+<tr>
+<td>unsubscribe channel 一个或多个</td>
+<td>取消订阅</td>
+</tr>
+<tr>
+<td>psubscribe [pattern]</td>
+<td>订阅模式</td>
+</tr>
+</tbody></table>
+<h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><p>是抢的，不是所有的人都收到消息。</p>
+<h3 id="Bitmap"><a href="#Bitmap" class="headerlink" title="Bitmap"></a>Bitmap</h3><p>位图</p>
+<table>
+<thead>
+<tr>
+<th>api</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setbit key offset value</td>
+<td>给位图指定索引设置值</td>
+</tr>
+<tr>
+<td>getbit key offset</td>
+<td>获取</td>
+</tr>
+<tr>
+<td>bitcount key 【start end】</td>
+<td>获取位图指定范围 单位字节</td>
+</tr>
+<tr>
+<td>bitop  op destkey key [key …]</td>
+<td>多个bitmap的and,or,not,xor操作把结果保存到destkey中</td>
+</tr>
+<tr>
+<td>bitpos key targetBit [start end]</td>
+<td>计算位图指定范围</td>
+</tr>
+</tbody></table>
+<ul>
+<li>独立用户统计</li>
+</ul>
+<p>1.set和bitmap(占用空间小)</p>
+<ul>
+<li>使用经验</li>
+</ul>
+<p>1.type = String 最大512MB<br>2.注意setbit时的偏移量，可能有较大耗时<br>3.位图不是绝对好</p>
+<h3 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h3><blockquote>
+<p>极小的空间来完成独立用户统计，本质是字符串</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>api</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pfadd key element [element…]</td>
+<td>向hyperloglog添加元素</td>
+</tr>
+<tr>
+<td>pfcount key [key ..]</td>
+<td>计算hyperloglog的独立总数</td>
+</tr>
+<tr>
+<td>pfmerge destkey sourcekey [sourcekey]</td>
+<td>合并多个hyperloglog</td>
+</tr>
+</tbody></table>
+<ul>
+<li>使用经验</li>
+</ul>
+<p>1.是否能容忍错误？<br>2.是否需要单条数据?</p>
+<h3 id="Geo"><a href="#Geo" class="headerlink" title="Geo"></a>Geo</h3><p>基于地理信息位置的数据结构</p>
+<table>
+<thead>
+<tr>
+<th>api</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>geo key  longitude latitude member [longitude latitude member  ]</td>
+<td>增加地理位置信息</td>
+</tr>
+<tr>
+<td>geopos key member [member]</td>
+<td>获取地理位置信息</td>
+</tr>
+<tr>
+<td>geodist key member1 member2  [unit]</td>
+<td>获取两地地理位置的距离 m,km,mi(英里),ft(尺)</td>
+</tr>
+</tbody></table>
+<p>georadius key longitude latitude radiusm |km|ft|mi [withcoord]  [withdist]  [withhash]  [ Count count ]  [asc|desc]  [store key]  [storedist key]<br>获取指定位置范围内的地理位置信息集合<br>withcoord：返回结果中包含的经纬度<br>withdist：返回结果中包含距离中心节点位置<br>withhash:返回结果中包含geohash<br>Count count:指定返回结果的数量<br>asc|desc:返回结果按照距离中心节点的距离升序或降序<br>store key：将返回结果的地理位置信息保存到指定的键<br>storedist key：将返回结果距离中心节点的距离保存到指定的键</p>
+<h3 id="Redis持久化"><a href="#Redis持久化" class="headerlink" title="Redis持久化"></a>Redis持久化</h3><ul>
+<li>持久化的作用<br>redis所有的数据保存在内存中，对数据的更新将异步保存到磁盘。有利于数据的恢复。</li>
+<li>数据库持久化的方式<br>快照（MySQL dump  Redis RDB），写日志 (MySQL Binlog  Hbase Hlog  Redis AOF)</li>
+</ul>
+<center style="color:red">未完待续</center>
 
 
       
@@ -1164,11 +1337,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
+                <a href="javascript:void(0)" class="js-tag color5">容器技术</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">容器技术</a>
+                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1180,11 +1353,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Linux入门</a>
+                <a href="javascript:void(0)" class="js-tag color3">Nginx入门</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Nginx入门</a>
+                <a href="javascript:void(0)" class="js-tag color3">Linux入门</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1200,15 +1373,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mysql存储引擎</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">springBoot‘s log framework</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1220,6 +1385,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mysql存储引擎</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
@@ -1228,19 +1405,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">dfs+回溯</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">spring源码学习-ioc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">dp问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">dfs+回溯</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
               </li>
             
             <div class="clearfix"></div>
