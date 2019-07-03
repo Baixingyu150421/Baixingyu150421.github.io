@@ -17,7 +17,7 @@
 <meta property="og:description" content="互联网公司广泛应用的一款高性能Key-Value服务器">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3415617548,1216693599&fm=26&gp=0.jpg">
-<meta property="og:updated_time" content="2019-07-03T09:34:27.938Z">
+<meta property="og:updated_time" content="2019-07-03T14:19:37.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis从入门到精通">
 <meta name="twitter:description" content="互联网公司广泛应用的一款高性能Key-Value服务器">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">4.4k字</span>
+        <span class="post-count">4.8k字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">18分</span>
+        <span class="post-count">19分</span>
       </span>
     </span>
 </div>
@@ -1323,7 +1323,51 @@
 <p>一个master可以有多个slave,一个slave只能有一个master，数据流向是单向的，master到slave</p>
 </blockquote>
 </li>
+<li><p>两种实现方式<br>slaveof命令，配置<br>取消复制：slaveof no one<br>修改配置slaveof ip port  slave-read-only yes </p>
+</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>命令</th>
+<th>配置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>优点</td>
+<td>无需重启</td>
+<td>统一配置</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>不便于管理</td>
+<td>需要配置</td>
+</tr>
+</tbody></table>
+<p>redis-cli -p 6380 info server | grep run 查看runid<br>redis-cli -p 6380 info replication  查看偏移量</p>
+<ul>
+<li>全量复制<br>略</li>
+<li>全量复制的开销</li>
+</ul>
+<p>1.bgsave时间<br>2.RDB文件网络传输时间<br>3.从节点清空数据时间<br>4.从节点加载RDB的时间<br>5.可能的AOF重写时间</p>
+<ul>
+<li><p>部分复制<br>降低全量复制的开销</p>
+</li>
+<li><p>故障处理<br>自动故障转移<br>主从结构-故障转移<br>slave宕机  master宕机</p>
+</li>
+<li><p>开发与运维</p>
+</li>
+</ul>
+<p>1.读写分离<br>读流量分摊到从节点，复制数据延迟，读到过期的数据，从节点故障<br>2.主从配置不一致<br>maxmemory不一致：丢失数据，优化参数<br>3.规避全量复制<br>第一次必须全量复制，数据分片；节点运行ID不匹配，主节点重启；复制积压缓冲区不足 增大复制缓冲区配置rel_backlog_size<br>4.规避复制风暴<br>单节点复制风暴，更换复制拓扑结构，单机器复制风暴，主节点分散多机器。</p>
+<h3 id="Redis-Sentinel"><a href="#Redis-Sentinel" class="headerlink" title="Redis Sentinel"></a>Redis Sentinel</h3><p>主从复制高可用的问题？<br>1.手动故障转移，写能力与存储能力受限</p>
+<ul>
+<li><p>Redis Sentinel架构</p>
+</li>
+<li><p>安装与配置</p>
+</li>
+</ul>
+<p>1.配置开启主从节点<br>2.配置开启sentinel监控主节点。（sentinel是特殊的redis）<br>3.实际应该多机器<br>4.详细配置节点</p>
 <center style="color:red">未完待续</center>
 
 
@@ -1577,7 +1621,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">容器技术</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1585,11 +1633,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
+                <a href="javascript:void(0)" class="js-tag color5">容器技术</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1605,19 +1649,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
