@@ -17,7 +17,7 @@
 <meta property="og:description" content="互联网公司广泛应用的一款高性能Key-Value服务器">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3415617548,1216693599&fm=26&gp=0.jpg">
-<meta property="og:updated_time" content="2019-07-03T14:19:37.950Z">
+<meta property="og:updated_time" content="2019-07-04T10:35:25.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis从入门到精通">
 <meta name="twitter:description" content="互联网公司广泛应用的一款高性能Key-Value服务器">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">4.8k字</span>
+        <span class="post-count">5.4k字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">19分</span>
+        <span class="post-count">21分</span>
       </span>
     </span>
 </div>
@@ -1368,6 +1368,46 @@
 </li>
 </ul>
 <p>1.配置开启主从节点<br>2.配置开启sentinel监控主节点。（sentinel是特殊的redis）<br>3.实际应该多机器<br>4.详细配置节点</p>
+<ul>
+<li>客户端接入流程</li>
+</ul>
+<p>1.Sentinel地址集合<br>2.masterName<br>3.消息发布订阅</p>
+<ul>
+<li>故障转移</li>
+</ul>
+<p>1.客户端<br>2.服务端</p>
+<ul>
+<li>redis-sentinel的定时任务</li>
+</ul>
+<p>1.每10秒每个sentinel对master和slave执行info,发现主节点，及其主从关系<br>2.每两秒每个sentinel通过master节点的channel交换信息<br>3.每一秒每个sentinel对其他sentinel和redis执行ping操作</p>
+<ul>
+<li><p>主管下线和客观下线<br>sentinel monitor  <mastername>  <ip>  <port>  <quorum><br>sentinel down-after-millisenconds <mastername> <timeout><br>主观下线：每个sentinel节点对Redis节点失败的“偏见”<br>客观下线：所有sentinel节点对Redis节点失败达成共识</timeout></mastername></quorum></port></ip></mastername></p>
+</li>
+<li><p>领导者的选举<br>只需要一个sentinel节点完成故障转移<br>sentinel is-master-down-by-addr命令都希望成为领导者</p>
+</li>
+</ul>
+<p>1.每个做主观下线的sentinel节点向其他sentinel节点发送命令，要求将它设置为领导者<br>2.收到命令的sentinel节点如果没有同意通过其他sentinel节点发送的命令，那么将同意该请求，否则拒绝。<br>3.如果该sentinel节点发现自己的票数已经超过sentinel集合半数且超过quorum，那么它将成为领导者。<br>4.如果此过程有多个sentinel节点成为领导者，那么将等待一段时间重新选举</p>
+<ul>
+<li>故障转移</li>
+</ul>
+<p>1.从slave节点中选出一个“合适的”节点作为新的master节点<br>2.对上面的slave节点执行slaveof no one 命令让其成为master节点<br>3.向剩余的slave节点发送命令，让它们成为新的master节点的slave节点，复制规则和parallel-syncs参数有关<br>4.更新对原来master节点配置为slave，并保持对其关注，当其恢复后命令它去复制新的master节点</p>
+<ul>
+<li>选择合适的slave节点</li>
+</ul>
+<p>1.选择slave-priority(slave节点优先级)最高的slave节点，如果存在则返回，不存在则继续<br>2.选择复制偏移量最大的slave节点（复制最完整的），如果存在则返回，不存在则继续<br>3.选择runid最小的slave节点</p>
+<p>Redis Sentinel</p>
+<ul>
+<li><p>常见开发运维问题<br>节点运维：从节点，主节点，其余sentinel节点，节点上下线</p>
+</li>
+<li><p>高可用读写分离<br>建议使用集群模式，redis-cluster</p>
+</li>
+</ul>
+<h3 id="Redis-Cluster-集群功能"><a href="#Redis-Cluster-集群功能" class="headerlink" title="Redis Cluster(集群功能)"></a>Redis Cluster(集群功能)</h3><ul>
+<li><p>呼唤集群：解决实际业务问题<br>并发量ops,数据量，网络流量</p>
+</li>
+<li><p>数据分布</p>
+</li>
+</ul>
 <center style="color:red">未完待续</center>
 
 
@@ -1621,19 +1661,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">容器技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1649,15 +1689,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1665,15 +1697,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">分布式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">springBoot‘s log framework</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mysql存储引擎</a>
+                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
+                <a href="javascript:void(0)" class="js-tag color5">mysql存储引擎</a>
               </li>
              
               <li class="article-tag-list-item">
