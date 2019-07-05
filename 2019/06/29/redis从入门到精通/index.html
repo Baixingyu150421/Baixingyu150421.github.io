@@ -17,7 +17,7 @@
 <meta property="og:description" content="互联网公司广泛应用的一款高性能Key-Value服务器">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3415617548,1216693599&fm=26&gp=0.jpg">
-<meta property="og:updated_time" content="2019-07-04T10:35:25.548Z">
+<meta property="og:updated_time" content="2019-07-05T06:41:52.224Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis从入门到精通">
 <meta name="twitter:description" content="互联网公司广泛应用的一款高性能Key-Value服务器">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">5.4k字</span>
+        <span class="post-count">6k字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">21分</span>
+        <span class="post-count">24分</span>
       </span>
     </span>
 </div>
@@ -1405,9 +1405,74 @@
 <h3 id="Redis-Cluster-集群功能"><a href="#Redis-Cluster-集群功能" class="headerlink" title="Redis Cluster(集群功能)"></a>Redis Cluster(集群功能)</h3><ul>
 <li><p>呼唤集群：解决实际业务问题<br>并发量ops,数据量，网络流量</p>
 </li>
-<li><p>数据分布</p>
+<li><p>数据分布<br>顺序分区，哈希分区（节点取模）</p>
+</li>
+<li><p>数据分布对比</p>
 </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>分布方式</th>
+<th>特点</th>
+<th>典型产品</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>哈希分布</td>
+<td>数据分散度高，键值分布业务无关，无法顺序访问，支持批量操作</td>
+<td>一致性哈希Memcache等</td>
+</tr>
+<tr>
+<td>顺序分布</td>
+<td>数据分散度易倾斜，键值业务相关，可顺序访问，不支持批量操作</td>
+<td>HBase,BigTable</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>哈希分布</p>
+<blockquote>
+<p>节点取余分区，一致性hash分区，虚拟槽分区</p>
+</blockquote>
+</li>
+<li><p>节点取余 例子： hash(key)  % nodes<br>如果需要增加节点，数据迁移量很大，客户端分片：哈希+取余，节点伸缩：数据节点关系变化，导致数据迁移，迁移数量和添加节点数据有关：建议使用扩容迁移</p>
+</li>
+<li><p>一致性哈希<br>数据范围作为一个圆环，每个节点负责一部分范围，顺时针去寻找节点，数据迁移量很小<br>客户端分片：哈希+顺时针，节点伸缩只影响邻近的节点，可以保证最小迁移数据和负载均衡，翻倍扩容。</p>
+</li>
+<li><p>虚拟槽分区(16384个槽)<br>预设虚拟槽:每个槽映射一个数据子集，一般比节点数大<br>良好的哈希函数：CRC16<br>服务端管理节点，槽，数据：Redis cluster </p>
+</li>
+<li><p>搭建集群基本架构<br>Redis  Cluster 复制，高可用，分片</p>
+</li>
+<li><p>两种安装<br>原生命令安装</p>
+<blockquote>
+<p>1.配置开启节点 2.meet 3.指派槽 4.主从</p>
+</blockquote>
+</li>
+<li><p>Cluster节点主要配置<br>cluster-enabled yes<br>cluster-node-timeout 15000(节点超时的时间)<br>cluster-config-file “nodes.conf”<br>cluster-require-full-coverage no（不需要所有节点都是成功的就可保证节点时上线的状态）</p>
+</li>
+</ul>
+<ul>
+<li><p>分配槽：<br>例子： redis-cli -h 127.0.0.1 -p 7000 cluster addslots {0…5461}</p>
+</li>
+<li><p>设置主从关系：<br>例子：redis-cli -h 127.0.0.1 -p 7003 cluster replicate ${node-id-7000}</p>
+</li>
+<li><p>搭建集群-具体安装</p>
+</li>
+<li><p>搭建集群-meet(节点握手)<br>redis-cli -p 7000 cluster meet 127.0.0.1 7005</p>
+</li>
+<li><p>分配槽<br>写脚本，去分配槽给各个节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">start=$1</span><br><span class="line">end=$2</span><br><span class="line">port=$3</span><br><span class="line"></span><br><span class="line">for slot in `seq $&#123;start&#125; $&#123;end&#125;`</span><br><span class="line">do</span><br><span class="line">  echo "slot:$&#123;slot&#125;"</span><br><span class="line">  redis-cli -p $&#123;port&#125; cluster addslots $&#123;slot&#125;</span><br><span class="line">done	</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">执行脚本</span></span><br><span class="line"><span class="meta">#</span><span class="bash">sh addslots.sh 10923 16383 7002</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>查看节点的情况<br>redis-cli -p port cluster nodes</p>
+<ul>
+<li>分配主从<br>redis-cli -p 7005 cluster replicate 8001e0fdbb4ccdd87cc2526e3736a8c7277732cf<br>redis-cli -p 7000 cluster slots</li>
+</ul>
+<p><strong>Ruby环境准备</strong><br>下载，编译，安装Ruby</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wget https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.1.tar.gz</span><br><span class="line">tar xvf ruby-2.3.1.tar.gz</span><br><span class="line">cd ruby-2.3.1</span><br><span class="line">./configure -prefix=/usr/local/ruby</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line">wget http://rubygems.org/downloads/redis-3.3.0.gem</span><br><span class="line">sudo gem install -l redis-3.3.0.gem</span><br><span class="line">sudo gem list -- check redis gem</span><br></pre></td></tr></table></figure>
+
+<p>官方工具安装</p>
 <center style="color:red">未完待续</center>
 
 
@@ -1661,7 +1726,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
+                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1669,7 +1734,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
+                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1681,11 +1746,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Linux入门</a>
+                <a href="javascript:void(0)" class="js-tag color3">Nginx入门</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Nginx入门</a>
+                <a href="javascript:void(0)" class="js-tag color3">Linux入门</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1697,19 +1762,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">springBoot‘s log framework</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
+                <a href="javascript:void(0)" class="js-tag color2">springBoot‘s log framework</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1725,7 +1786,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1733,7 +1794,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">spring源码学习-ioc</a>
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1742,6 +1803,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">dfs+回溯</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">spring源码学习-ioc</a>
               </li>
             
             <div class="clearfix"></div>
