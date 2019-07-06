@@ -17,7 +17,7 @@
 <meta property="og:description" content="动态规划相关的算法问题是校招笔试面试中的必会题目。   听首音乐，放松一下心情^_^">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://uploadfiles.nowcoder.com/images/20180120/8714452_1516433200098_47A6932593CCC1B08960C7B9B6BD8CB4">
-<meta property="og:updated_time" content="2019-07-01T05:22:03.188Z">
+<meta property="og:updated_time" content="2019-07-06T16:35:43.142Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态规划">
 <meta name="twitter:description" content="动态规划相关的算法问题是校招笔试面试中的必会题目。   听首音乐，放松一下心情^_^">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1k字</span>
+        <span class="post-count">1.1k字</span>
       </span>
     </span>
 
@@ -242,6 +242,9 @@
 <p>这道题leetcode官方给出了4种解法：暴力枚举，中心扩展法，动态规划法，Manacher算法，虽然本题动态规划法不是最优解，但是还是记录一下。</p>
 </blockquote>
 <h3 id="直接看code"><a href="#直接看code" class="headerlink" title="直接看code"></a>直接看code</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s.length() == <span class="number">1</span>) <span class="keyword">return</span> s;</span><br><span class="line">        <span class="keyword">int</span> length = s.length();</span><br><span class="line">        <span class="keyword">boolean</span> [][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[length][length];</span><br><span class="line">        String str = <span class="string">""</span>;</span><br><span class="line">        <span class="comment">//从尾部向前推导</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = length - <span class="number">1</span> ; i &gt;= <span class="number">0</span> ; i--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i ; j &lt; length ; j++)&#123;</span><br><span class="line">            	<span class="comment">//i,j位置的字符相等，且长度小于2或者比i,j小一些的字符串也是回文的那就可以扩展。</span></span><br><span class="line">                dp[i][j] = s.charAt(i) == s.charAt(j) &amp;&amp; (j- i &lt; <span class="number">2</span> || dp[i+<span class="number">1</span>][j - <span class="number">1</span>]);</span><br><span class="line">                <span class="comment">//如果当前字符串i，j位置是回文的，且其长度大于之间的回文串的长度那么就更新</span></span><br><span class="line">                <span class="keyword">if</span>(dp[i][j] &amp;&amp; j - i + <span class="number">1</span> &gt; str.length() )&#123;</span><br><span class="line">                    str = s.substring(i,j+<span class="number">1</span>);   </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//最终返回结果</span></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="题目3"><a href="#题目3" class="headerlink" title="题目3"></a>题目3</h3><p>leetcode343整数拆分：<a href="https://leetcode-cn.com/problems/integer-break/" target="_blank" rel="noopener">出处</a></p>
+<h3 id="思路和code"><a href="#思路和code" class="headerlink" title="思路和code"></a>思路和code</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">integerBreak</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">       <span class="keyword">if</span>(n == <span class="number">3</span>) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">       <span class="keyword">int</span> [] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">       dp[<span class="number">2</span>] = <span class="number">2</span>;</span><br><span class="line">       dp[<span class="number">3</span>] = <span class="number">3</span>;</span><br><span class="line">       dp[<span class="number">4</span>] = <span class="number">4</span>;</span><br><span class="line">       <span class="comment">//n小于等于5时，可以推出值，之后可以知道拆分出越多的2或者3可以使得乘积更大，因此可以列出状态转移方程</span></span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">5</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">           dp[i] = Math.max(dp[i - <span class="number">2</span>] * <span class="number">2</span>,dp[i - <span class="number">3</span>] * <span class="number">3</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> dp[n];</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="分析与总结"><a href="#分析与总结" class="headerlink" title="分析与总结"></a>分析与总结</h3><p>动态规划法很明显是一种空间换时间的求解方法。本题的空间复杂度O(n<em>m),时间复杂度O(n * m)<br>我这个凑弟弟要在努力一些啊，争取笔试全AC(</em>^▽^*)</p>
 
@@ -495,10 +498,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
@@ -507,7 +506,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">线程的原子性，安全性，有序性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Linux入门</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -515,11 +526,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Linux入门</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -528,10 +539,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分布式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,11 +558,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -571,15 +578,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">dfs+回溯</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">线程的原子性，安全性，有序性</a>
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
             
             <div class="clearfix"></div>
