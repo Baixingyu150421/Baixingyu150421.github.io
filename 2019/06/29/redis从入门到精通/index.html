@@ -17,7 +17,7 @@
 <meta property="og:description" content="互联网公司广泛应用的一款高性能Key-Value服务器">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3415617548,1216693599&fm=26&gp=0.jpg">
-<meta property="og:updated_time" content="2019-07-06T05:43:50.230Z">
+<meta property="og:updated_time" content="2019-07-07T07:13:17.637Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis从入门到精通">
 <meta name="twitter:description" content="互联网公司广泛应用的一款高性能Key-Value服务器">
@@ -194,7 +194,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">6.4k字</span>
+        <span class="post-count">8.4k字</span>
       </span>
     </span>
 
@@ -203,7 +203,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">25分</span>
+        <span class="post-count">33分</span>
       </span>
     </span>
 </div>
@@ -1488,7 +1488,179 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="客户端路由"><a href="#客户端路由" class="headerlink" title="客户端路由"></a>客户端路由</h3><p>1.moved重定向(槽命中和不命中)<br>2.ask重定向</p>
+<h3 id="客户端路由"><a href="#客户端路由" class="headerlink" title="客户端路由"></a>客户端路由</h3><p>1.moved重定向(槽命中和不命中)<br>2.ask重定向<br>在有槽迁移过程中，提醒重定向。</p>
+<blockquote>
+<p>moved和ask都是客户端重定向，moved表示槽已经确定迁移，ask表示槽还在迁移。因此我们需要保证客户端的高效访问。 </p>
+</blockquote>
+<h4 id="smart客户端"><a href="#smart客户端" class="headerlink" title="smart客户端"></a>smart客户端</h4><ul>
+<li>实现原理</li>
+</ul>
+<p>1.从集群中选取一个可运行的节点，使用cluster slots初始化槽和节点映射<br>2.将cluster slots的结果映射到本地，为每个节点创建JedisPool<br>3.准备执行命令</p>
+<p>spring整合jediscluster<br>mget与mset必须在一个槽上<br>1.串行mget<br>2.串行IO 本地CRC16算出节点位置<br>3.并行IO<br>4.hash_tag</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>优点</th>
+<th>缺点</th>
+<th>网络IO</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>串行mget</td>
+<td>编程简单，少量keys满足需求</td>
+<td>大量keys请求延迟严重</td>
+<td>O(keys)</td>
+</tr>
+<tr>
+<td>串行IO</td>
+<td>编程简单，少量节点满足需求</td>
+<td>大量node延迟严重</td>
+<td>O(nodes)</td>
+</tr>
+<tr>
+<td>并行IO</td>
+<td>利用并行特性延迟取决于最慢的节点</td>
+<td>编程复杂，超时定位问题难</td>
+<td>O(max_slow(node))</td>
+</tr>
+<tr>
+<td>hash_tag</td>
+<td>性能最高</td>
+<td>读写增加tag维护成本tag分布易出现数据倾斜</td>
+<td>O(1)</td>
+</tr>
+</tbody></table>
+<h3 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h3><ul>
+<li>故障发现</li>
+</ul>
+<p>1.通过ping/pong消息实现故障发现：不需要sentinel<br>2.主观下线和客观下线</p>
+<ul>
+<li><p>主观下线：</p>
+<blockquote>
+<p>某个节点认为另一个节点不可用，“存在偏见”</p>
+</blockquote>
+</li>
+<li><p>客观下线：</p>
+<blockquote>
+<p>当半数以上持有槽的主节点都标记某节点主观下线</p>
+</blockquote>
+</li>
+<li><p>尝试客观下线</p>
+<blockquote>
+<p>通知集群内所有节点标记故障节点为客观下线<br>通知故障节点的从节点触发故障转移流程</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="故障恢复"><a href="#故障恢复" class="headerlink" title="故障恢复"></a>故障恢复</h3><ul>
+<li>检测资格<br>每个从节点检查与故障主节点的断线时间<br>超过cluster-node-timeout * cluster-slave-validity-factor取消资格<br>cluster-slave-validity-factor:默认是10</li>
+<li>准备选举时间<br>保证数据的一致性最高</li>
+<li>选举投票<br>超过N/2 + 1</li>
+<li>替换主节点</li>
+</ul>
+<p>1.当前从节点取消复制变为主节点 slaveof no one<br>2.执行clusterDelSlot撤销故障主节点负责的槽，并执行clusterAddSlot把这些槽分配给自己<br>3.向集群广播自己的pong消息，表明已经替换了故障从节点</p>
+<h3 id="Redis-Cluster开发运维常见问题"><a href="#Redis-Cluster开发运维常见问题" class="headerlink" title="Redis Cluster开发运维常见问题"></a>Redis Cluster开发运维常见问题</h3><ul>
+<li><p>集群完整性<br>cluster-require-full-coverage默认为yes<br>集群中16384个槽全部可用：保证集群完整性<br>节点故障或者正在故障转移</p>
+</li>
+<li><p>带宽消耗<br>官方建议：1000个节点，带宽消耗<br>消息发送频率：节点发现与其它节点最后通信时间超过cluster-node-timeout/2时会直接发送ping消息<br>消息数据量:slots槽数组，整个集群1/10的状态数据<br>节点部署的机器规模：集群分布的机器越多且每台机器划分的节点数越均匀，则集群内整体的可用带宽越高。</p>
+</li>
+<li><p>优化<br>避免“大”集群：避免多个业务使用一个集群，大业务可以多集群<br>cluster-node-timeout:带宽和故障转移速度的均衡<br>尽量均匀分配到多个机器：保证高可用和带宽</p>
+</li>
+<li><p>Pub/Sub广播</p>
+</li>
+<li><p>问题：publish在集群中广播会占用带宽</p>
+</li>
+<li><p>集群倾斜</p>
+</li>
+</ul>
+<p><strong>数据倾斜</strong><br>节点和槽分配不均匀</p>
+<blockquote>
+<p> redis-trib.rb info ip:port 查看节点，槽，键值分布<br>不同槽对应的键值数量差异较大<br>CRC16正常情况下比较均匀，可能存在hash_tag   cluster countkeysinslot {slot}获取槽对应键值个数<br>包含bigkey<br> 例如大字符串，几百万的元素hash,set  从节点：redis-cli  –bigkeys  优化数据结构<br>内存相关配置不一致<br>hash-max-ziplist-value set -max-intset-entries   定期检查配置一致性</p>
+</blockquote>
+<p><strong>请求倾斜</strong></p>
+<ul>
+<li>存在热点key</li>
+<li>优化：避免bigkey,热键不要使用hash_tag,一致性不高时，使用本地缓存+MQ</li>
+</ul>
+<p><strong>读写分离</strong></p>
+<ul>
+<li>只读连接：集群模式的从节点不接受任何读写请求<br>重定向到负责槽的主节点<br>readonly命令可以读：连接级别命令</li>
+<li>读写分离：更加复杂<br>问题：复制延迟，读取过期数据，从节点故障<br>修改客户端 cluster slaves {nodeId}</li>
+</ul>
+<p><strong>数据迁移</strong></p>
+<ul>
+<li>官方迁移工具：redis-trib.rb import<br>只能从单机迁移到集群<br>不支持在线迁移：source需要停写<br>不支持断点续传<br>单线程迁移：影响速度</li>
+<li>第三方工具<br>redis-migrate-tool,redis-port  伪装成source节点的slave节点获取全量数据</li>
+</ul>
+<h4 id="集群的限制"><a href="#集群的限制" class="headerlink" title="集群的限制"></a>集群的限制</h4><ul>
+<li>key批量操作支持有限，例如mget,mset必须在一个slot</li>
+<li>key事务和Lua支持有限：操作的key必须在一个节点</li>
+<li>key是数据分区的最小粒度，不支持bigkey分区</li>
+<li>不支持多数据库：集群模式下只有一个db0</li>
+<li>复制只支持一层，不支持树状复制结构</li>
+</ul>
+<p>Redis Cluster与Redis sentinel的对比</p>
+<h3 id="集群总结"><a href="#集群总结" class="headerlink" title="集群总结"></a>集群总结</h3><p>Redis cluster数据分区规则采用虚拟槽方式（16384个槽），每个节点负责一部分槽和相关数据，实现数据和请求的负载均衡<br>搭建集群步骤：准备节点，节点握手，分配槽，复制 redis-trib.rb工具快速搭建集群<br>集群伸缩通过在节点之间移动槽和相关数据实现</p>
+<ul>
+<li>扩容时根据槽迁移计划把槽从源节点迁移到新节点</li>
+<li>收缩时如果下线的节点有负责的槽需要迁移到其他节点，在通过cluster forget命令让集群内所有节点忘记被下线的节点。</li>
+</ul>
+<p>使用smart客户端操作集群达到通信效率最大化，客户端内部负责计算维护键–&gt;槽–&gt;节点的映射，用于快速定位到目标节点<br>集群自动故障转移过程分为故障发现和节点恢复，节点下线分为主观下线和客观下线，当超过半数主节点认为故障节点为主观下线是标记它为客观下线状态，从节点负责对客观下线的主节点触发故障恢复流程，保证集群的可用性。<br>常见问题：超大规模集群带宽消耗，pub/sub广播问题，集群倾斜问题，单机和集群对比</p>
+<h3 id="缓存的使用与设计"><a href="#缓存的使用与设计" class="headerlink" title="缓存的使用与设计"></a>缓存的使用与设计</h3><ul>
+<li>缓存的收益与成本<br>加速读写（各种类型的缓存），降低后端负载（MySQL的访问压力）<br>数据不一致（缓存层与数据层有时间窗口不一致，与更新策略有关），代码维护成本。<br>使用场景</li>
+</ul>
+<p>1.降低后端负载：对高消耗的SQL：join结果集/分组统计结果缓存<br>2.加速请求响应：redis/memcache优化IO响应时间<br>3.大量写合并为批量写：例如计数器先redis类加在批量写DB</p>
+<ul>
+<li>缓存更新策略</li>
+</ul>
+<ol>
+<li>LRU/LFU/FIFO算法剔除：例如maxmemory-policy</li>
+<li>超级剔除 expire</li>
+<li>主动更新</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>一致性</th>
+<th>维护成本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LRU/LIRS算法</td>
+<td>最差</td>
+<td>低</td>
+</tr>
+<tr>
+<td>超时剔除</td>
+<td>较差</td>
+<td>低</td>
+</tr>
+<tr>
+<td>主动更新</td>
+<td>强</td>
+<td>高</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>建议<br>低一致性：最大内存和淘汰策略<br>高一致性：超时剔除和主动更新结合，最大内存和淘汰策略兜底</p>
+</li>
+<li><p>缓存粒度控制</p>
+</li>
+</ul>
+<p>1.通用性：全量属性最好<br>2.占用空间：部分属性更好<br>3.代码维护：表面上全量属性好</p>
+<ul>
+<li>缓存穿透问题-大量请求不命中</li>
+</ul>
+<p><strong>原因：</strong><br>1.业务代码问题<br>2.恶意攻击<br><strong>发现问题</strong><br>业务的响应时间<br>缓存命中数<br><strong>解决方法：</strong><br>1.缓存空对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getPassThrough</span><span class="params">(String key)</span></span>&#123;</span><br><span class="line">	String cacheValue = cache.get(key);</span><br><span class="line">	<span class="keyword">if</span>(StringUtils.isBlank(cacheValue))&#123;</span><br><span class="line">	 String stroageValue = storage.get(key);</span><br><span class="line">	 cache.set(key,storageValue);</span><br><span class="line">	 </span><br><span class="line">	 <span class="comment">//如果存储数据为空，设置一个过期时间</span></span><br><span class="line">	 <span class="keyword">if</span>(StringUtils.isBlank(storageValue))&#123;</span><br><span class="line">	  cache.expire(key,<span class="number">60</span> * <span class="number">5</span>);</span><br><span class="line">	 &#125;</span><br><span class="line">	 <span class="keyword">return</span> storageValue;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> cacheValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>问题：</strong><br>需要更多键<br>缓存层与存储层的数据不一致</p>
+<p>2.使用布隆过滤器</p>
+<ul>
+<li>缓存雪崩问题</li>
+</ul>
+<p>缓存更新策略</p>
 <center style="color:red">未完待续</center>
 
 
@@ -1742,10 +1914,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">容器技术</a>
               </li>
              
@@ -1755,6 +1923,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1770,15 +1942,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1794,6 +1966,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -1802,23 +1978,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mysql索引</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">dp问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">spring源码学习-ioc</a>
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1827,6 +1991,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">spring源码学习-ioc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">dp问题</a>
               </li>
             
             <div class="clearfix"></div>
