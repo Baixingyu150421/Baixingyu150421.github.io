@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a55fd52b3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7ac1c13504?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7aca19377b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
-<meta property="og:updated_time" content="2019-06-25T11:17:51.288Z">
+<meta property="og:updated_time" content="2019-07-07T13:06:07.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql索引">
 <meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561208346213&di=bbb76971512fa396fda7a049425e7763&imgtype=0&src=http%3A%2F%2Fi8.download.fd.pchome.net%2Ft_600x1024%2Fg1%2FM00%2F12%2F1D%2FooYBAFbyYyWIfHdmACJs2Q7Yp1EAAC4LQMJG70AImzx874.jpg">
@@ -198,7 +198,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">1.7k字</span>
+        <span class="post-count">1.8k字</span>
       </span>
     </span>
 
@@ -248,12 +248,13 @@
 <p><strong>这里引用两种图来加深印象</strong><br><img src="https://camo.githubusercontent.com/57a746bf254e100c3fd0d2691d172df5c29592eb/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d31302d322f32383535393432312e6a7067" alt><br><img src="https://camo.githubusercontent.com/a0e0c5b1377f6ab52365479c52313f4238550d31/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d31302d322f38323035333133342e6a7067" alt></p>
 <h3 id="索引提高检索速度"><a href="#索引提高检索速度" class="headerlink" title="索引提高检索速度"></a>索引提高检索速度</h3><p>其实就是将无序的数据变成有序(相对)，其实底层结构就是B+树，B+树作为树的一种实现，能够让我们很快地查找出对应的记录。<br><strong>这里引用两种图来加深印象</strong><br><img src="https://camo.githubusercontent.com/83e4b2a638e8352a21feafeafe97cbad0fc2a335/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d31302d322f353337333038322e6a7067" alt><br><img src="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a5663f62b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></p>
 <h3 id="索引降低增删改的速度"><a href="#索引降低增删改的速度" class="headerlink" title="索引降低增删改的速度"></a>索引降低增删改的速度</h3><p>B+树是平衡树的一种。B+树是平衡树的一种，是不会退化成链表的，树的高度都是相对比较低的，建立索引实际上就是建立一颗B+树。要维持平衡树的结构势必要带来额外的性能开销。</p>
-<h3 id="哈希索引"><a href="#哈希索引" class="headerlink" title="哈希索引"></a>哈希索引</h3><p>哈希索引就是采用一定的哈希算法，把键值换算成新的哈希值，检索时不需要类似B+树那样从根节点到叶子节点逐级查找，只需一次哈希算法即可立刻定位到相应的位置，速度非常快。<br><strong>上图</strong><br><img src="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a55fd52b3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt><br>** 使用hash索引的缺点**</p>
+<h3 id="哈希索引"><a href="#哈希索引" class="headerlink" title="哈希索引"></a>哈希索引</h3><p>哈希索引就是采用一定的哈希算法，把键值换算成新的哈希值，检索时不需要类似B+树那样从根节点到叶子节点逐级查找，只需一次哈希算法即可立刻定位到相应的位置，速度非常快。<br><strong>上图</strong><br><img src="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7a55fd52b3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></p>
+<p><strong>使用hash索引的缺点</strong></p>
 <ul>
 <li>hash索引没办法利用索引完成排序</li>
 <li>不支持最左匹配原则</li>
 <li>有大量重复键值时，（即存在hash冲突）索引效率大大降低</li>
-<li>不支持范围查询<h3 id="InnoDB支持hash索引吗？"><a href="#InnoDB支持hash索引吗？" class="headerlink" title="InnoDB支持hash索引吗？"></a>InnoDB支持hash索引吗？</h3>主流的还是使用B+树索引比较多，对于哈希索引，InnoDB是自适应哈希索引的（hash索引的创建由InnoDB存储引擎引擎自动优化创建，我们干预不了）！<br><img src="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7ac1c13504?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></li>
+<li>不支持范围查询<h3 id="InnoDB支持hash索引吗？"><a href="#InnoDB支持hash索引吗？" class="headerlink" title="InnoDB支持hash索引吗？"></a>InnoDB支持hash索引吗？</h3>主流的还是使用B+树索引比较多，对于哈希索引，InnoDB存储引擎是自适应哈希索引的（hash索引的创建由InnoDB存储引擎引擎自动优化创建，我们干预不了）！<br><img src="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7ac1c13504?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt></li>
 </ul>
 <h3 id="聚集索引和非聚集索引"><a href="#聚集索引和非聚集索引" class="headerlink" title="聚集索引和非聚集索引"></a>聚集索引和非聚集索引</h3><ul>
 <li>聚集索引就是以主键创建的索引</li>
@@ -265,7 +266,7 @@
 <li>非聚集索引在叶子节点存储的是主键和索引列</li>
 <li>使用非聚集索引查询出数据时，拿到叶子上的主键再去查到想要查找的数据。(拿到主键再查找这个过程叫做回表) 非聚集索引也叫做二级索引。<br>非聚集索引在建立的时候也未必是单列的，可以多个列来创建索引。</li>
 <li>此时就涉及到了哪个列会走索引，哪个列不走索引的问题了。</li>
-<li>创建多个单列(非聚集)索引的时候，会生成多个索引树(所以过多创建索引会占用磁盘空间)<br>覆盖索引就是把要查询出的列和索引是对应的，不做回表操作！<br><img src="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7aca19377b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt><h3 id="索引的最左匹配原则"><a href="#索引的最左匹配原则" class="headerlink" title="索引的最左匹配原则"></a>索引的最左匹配原则</h3>最左匹配原则：</li>
+<li>创建多个单列(非聚集)索引的时候，会生成多个索引树(所以过多创建索引会占用磁盘空间)<br>覆盖索引就是把要查询出的列和索引是对应的，不做回表操作！(对于innodb来说）<br><img src="https://user-gold-cdn.xitu.io/2018/7/23/164c6d7aca19377b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt><h3 id="索引的最左匹配原则"><a href="#索引的最左匹配原则" class="headerlink" title="索引的最左匹配原则"></a>索引的最左匹配原则</h3>最左匹配原则：</li>
 <li>索引可以简单如一个列(a)，也可以复杂如多个列(a, b, c, d)，即联合索引。</li>
 <li>如果是联合索引，那么key也由多个列组成，同时，索引只能用于查找key是否存在（相等），遇到范围查询(&gt;、&lt;、between、like左匹配)等就不能进一步匹配了，后续退化为线性查找。</li>
 <li>因此，列的排列顺序决定了可命中索引的列数。<br>例子：</li>
@@ -275,12 +276,14 @@
 <ul>
 <li>如有索引(a, b, c, d)，查询条件c &gt; 3 and b = 2 and a = 1 and d &lt; 4与a = 1 and c &gt; 3 and b = 2 and d &lt; 4等顺序都是可以的，MySQL会自动优化为a = 1 and b = 2 and c &gt; 3 and d &lt; 4，依次命中a、b、c。</li>
 </ul>
-<h3 id="总结与回顾"><a href="#总结与回顾" class="headerlink" title="总结与回顾"></a>总结与回顾</h3><ul>
+<h3 id="水平分割与垂直分割"><a href="#水平分割与垂直分割" class="headerlink" title="水平分割与垂直分割"></a>水平分割与垂直分割</h3><h3 id="MySQL的主从复制与读写分离"><a href="#MySQL的主从复制与读写分离" class="headerlink" title="MySQL的主从复制与读写分离"></a>MySQL的主从复制与读写分离</h3><h3 id="总结与回顾"><a href="#总结与回顾" class="headerlink" title="总结与回顾"></a>总结与回顾</h3><ul>
 <li>1，最左前缀匹配原则。这是非常重要的原则，MySQL会一直向右匹配直到遇到范围查询（&gt;,&lt;,BETWEEN,LIKE）就停止匹配。</li>
 <li>2，尽量选择区分度高的列作为索引，区分度的公式是 COUNT(DISTINCT col) / COUNT(*)。表示字段不重复的比率，比率越大我们扫描的记录数就越少。</li>
 <li>3，索引列不能参与计算，尽量保持列“干净”。比如，FROM_UNIXTIME(create_time) = ‘2016-06-06’ 就不能使用索引，原因很简单，B+树中存储的都是数据表中的字段值，但是进行检索时，需要把所有元素都应用函数才能比较，显然这样的代价太大。所以语句要写成 ： create_time = UNIX_TIMESTAMP(‘2016-06-06’)。</li>
 <li>4，尽可能的扩展索引，不要新建立索引。比如表中已经有了a的索引，现在要加（a,b）的索引，那么只需要修改原来的索引即可。</li>
 <li>5，单个多列组合索引和多个单列索引的检索查询效果不同，因为在执行SQL时，MySQL只能使用一个索引，会从多个单列索引中选择一个限制最为严格的索引。</li>
+<li>6.索引不能是表达式的一部分，也不能是函数的参数，否则无法使用索引。</li>
+<li>7.大量字段的列使用前缀索引</li>
 </ul>
 
       
@@ -533,19 +536,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">容器技术</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java并发编程</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">java容器类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Java容器类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">容器技术</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,15 +600,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">spring源码学习-ioc</a>
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,15 +612,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">spring源码学习-ioc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">dfs+回溯</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">字符串，递归</a>
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+                <a href="javascript:void(0)" class="js-tag color2">字符串，递归</a>
               </li>
             
             <div class="clearfix"></div>
